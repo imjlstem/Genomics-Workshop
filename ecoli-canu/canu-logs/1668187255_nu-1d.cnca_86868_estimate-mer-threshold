@@ -1,0 +1,9 @@
+Canu v1.6 (+0 commits) r0 .
+
+Current Working Directory:
+/home/taller-2048/GENOMICS_WORKSHOP/ecoli-canu/correction/0-mercounts
+
+Command:
+/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/estimate-mer-threshold \
+  -h ./ecoli.ms16.histogram \
+  -c 1

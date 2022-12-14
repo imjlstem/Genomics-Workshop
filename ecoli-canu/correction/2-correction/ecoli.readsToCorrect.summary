@@ -1,0 +1,20 @@
+Corrected read length filter:
+
+  nReads  226
+  nBases  1653061 (input bases)
+  nBases  798985 (corrected bases)
+  Mean    3535
+  N50     4
+
+Raw read length filter:
+
+  nReads  226
+  nBases  1653061 (input bases)
+  nBases  798985 (corrected bases)
+  Mean    3535
+  N50     4
+
+TN         0 reads             0 raw bases (     0 ave)             0 corrected bases (     0 ave)
+FN         0 reads             0 raw bases (     0 ave)             0 corrected bases (     0 ave)
+FP         0 reads             0 raw bases (     0 ave)             0 corrected bases (     0 ave)
+TP       226 reads       1653061 raw bases (  7314 ave)        798985 corrected bases (  3535 ave)

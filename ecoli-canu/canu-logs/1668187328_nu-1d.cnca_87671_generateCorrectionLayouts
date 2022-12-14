@@ -1,0 +1,13 @@
+Canu v1.6 (+0 commits) r0 .
+
+Current Working Directory:
+/home/taller-2048/GENOMICS_WORKSHOP/ecoli-canu/correction/2-correction
+
+Command:
+/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/generateCorrectionLayouts \
+  -G ../ecoli.gkpStore \
+  -O ../ecoli.ovlStore \
+  -S ./ecoli.globalScores \
+  -c 0 \
+  -C 80 \
+  -p ./ecoli.estimate.WORKING

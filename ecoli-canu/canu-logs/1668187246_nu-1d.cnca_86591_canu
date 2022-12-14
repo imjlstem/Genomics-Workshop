@@ -1,0 +1,13 @@
+
+###
+###  Reading options from '/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/canu.defaults'
+###
+
+# Add site specific options (for setting up Grid or limiting memory/threads) here.
+
+###
+###  Reading options from the command line.
+###
+
+useGrid=false
+genomeSize=4.8m

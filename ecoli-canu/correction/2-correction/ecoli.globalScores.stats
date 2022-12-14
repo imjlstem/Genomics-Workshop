@@ -1,0 +1,40 @@
+PARAMETERS:
+----------
+
+     40 (expected coverage)
+      0 (don't use overlaps shorter than this)
+  0.000 (don't use overlaps with erate less than this)
+  1.000 (don't use overlaps with erate more than this)
+
+OVERLAPS:
+--------
+
+IGNORED:
+
+           0 (< 0.0000 fraction error)
+           0 (> 0.4095 fraction error)
+           0 (< 0 bases long)
+           0 (> 2097151 bases long)
+
+FILTERED:
+
+           0 (too many overlaps, discard these shortest ones)
+
+EVIDENCE:
+
+         862 (longest overlaps)
+
+TOTAL:
+
+         862 (all overlaps)
+
+READS:
+-----
+
+         628 (no overlaps)
+         226 (no overlaps filtered)
+           0 (<  50% overlaps filtered)
+           0 (<  80% overlaps filtered)
+           0 (<  95% overlaps filtered)
+           0 (< 100% overlaps filtered)
+

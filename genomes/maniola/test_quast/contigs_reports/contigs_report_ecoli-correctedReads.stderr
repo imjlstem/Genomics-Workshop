@@ -1,0 +1,38 @@
+Writing filtered delta file /home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.filter
+Reading delta file /home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.delta
+Writing plot files /home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.fplot, /home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.rplot
+ERROR: No alignment data to plot
+Stderr outputs for reference parts are in:
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part1
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part2
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part3
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part4
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part5
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part6
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part7
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part8
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part9
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part10
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part11
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part12
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part13
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part14
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part15
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part16
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part17
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part18
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part19
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part20
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part21
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part22
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part23
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part24
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part25
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part26
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part27
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part28
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part29
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part30
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stderr_part31
+
+1  Nothing aligned for /home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/quast_corrected_input/ecoli-correctedReads.fasta

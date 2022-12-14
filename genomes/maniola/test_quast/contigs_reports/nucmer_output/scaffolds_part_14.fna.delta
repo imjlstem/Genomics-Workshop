@@ -1,0 +1,13 @@
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/quast_corrected_input/split_ref/part_14.fna /home/taller-2048/GENOMICS_WORKSHOP/genomes/maniola/test_quast/quast_corrected_input/scaffolds.fasta
+NUCMER
+>NC_060042.1_Maniola_jurtina_chromosome_14__ilManJurt1.1__whole_genome_shotgun_sequence NODE_86_length_1913_cov_7.127996 14702743 1913
+3034681 3035794 1781 668 156 156 0
+-948
+5
+104
+-4
+0
+3051399 3052511 1781 669 160 160 0
+1056
+-4
+0

@@ -1,0 +1,21 @@
+Canu v1.6 (+0 commits) r0 .
+
+Current Working Directory:
+/home/taller-2048/GENOMICS_WORKSHOP/ecoli-canu/trimming/1-overlapper
+
+Command:
+/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/overlapInCore \
+  -G \
+  -t 8 \
+  -k 22 \
+  -k ../0-mercounts/ecoli.ms22.frequentMers.fasta \
+  --hashbits 23 \
+  --hashload 0.75 \
+  --maxerate 0.144 \
+  --minlength 500 \
+  -h 1-120 \
+  -r 1-120 \
+  --hashstrings 120 \
+  --hashdatalen 827663 \
+  -o ./001/000001.ovb.WORKING \
+  -s ./001/000001.stats ../ecoli.gkpStore

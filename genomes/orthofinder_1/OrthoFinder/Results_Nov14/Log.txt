@@ -1,0 +1,4 @@
+2022-11-14 09:24:50 : Started OrthoFinder version 2.5.2
+Command Line: /opt/python/miniconda3/envs/orthofinder/bin/orthofinder -f /home/taller-2048/GENOMICS_WORKSHOP/genomes/orthofinder_1
+
+WorkingDirectory_Base: /home/taller-2048/GENOMICS_WORKSHOP/genomes/orthofinder_1/OrthoFinder/Results_Nov14/WorkingDirectory/

@@ -1,0 +1,21 @@
+
+Starting file './ecoli.gkpStore.gkp'.
+
+  Loading reads from '../ecoli.correctedReads.fasta.gz'
+    Processed 241 lines.
+    Loaded 827543 bp from:
+      120 FASTA format reads (827543 bp).
+
+Finished with:
+  0 warnings (bad base or qv, too short, too long)
+
+Loaded into store:
+  827543 bp.
+  120 reads.
+
+Skipped (too short):
+  0 bp (0.0000%).
+  0 reads (0.0000%).
+
+
+gatekeeperCreate finished successfully.

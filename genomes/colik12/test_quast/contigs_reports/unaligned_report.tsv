@@ -1,0 +1,6 @@
+Assembly	ecoli.correctedReads	scaffolds
+# fully unaligned contigs	120	235
+Fully unaligned length	827543	197630
+# partially unaligned contigs	-	9
+Partially unaligned length	-	61071
+# N's	0	1200

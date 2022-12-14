@@ -1,0 +1,14 @@
+Assembly	ecoli.correctedReads	scaffolds
+# misassemblies	-	10
+    # relocations	-	8
+    # translocations	-	0
+    # inversions	-	2
+# misassembled contigs	-	7
+Misassembled contigs length	-	557810
+# local misassemblies	-	16
+# unaligned mis. contigs	-	0
+# mismatches	-	115
+# indels	-	13
+    # indels (<= 5 bp)	-	8
+    # indels (> 5 bp)	-	5
+Indels length	-	233

@@ -1,0 +1,34 @@
+Command line: /opt/bioinf/SPAdes-3.7.1/SPAdes-3.7.1-Linux/bin/spades.py -s /home/taller-2048/GENOMICS_WORKSHOP/SRR18106304.fastq -o /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades 
+
+System information:
+  SPAdes version: 3.7.1
+  Python version: 2.7.5
+  OS: Linux-3.10.0-1160.76.1.el7.x86_64-x86_64-with-centos-7.9.2009-Core
+
+Output dir: /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades
+Mode: read error correction and assembling
+Debug mode is turned OFF
+
+Dataset parameters:
+  Multi-cell mode (you should set '--sc' flag if input data was obtained with MDA (single-cell) technology or --meta flag if processing metagenomic dataset)
+  Reads:
+    Library number: 1, library type: single
+      left reads: not specified
+      right reads: not specified
+      interlaced reads: not specified
+      single reads: ['/home/taller-2048/GENOMICS_WORKSHOP/SRR18106304.fastq']
+Read error correction parameters:
+  Iterations: 1
+  PHRED offset will be auto-detected
+  Corrected reads will be compressed (with gzip)
+Assembly parameters:
+  k: automatic selection based on read length
+  Mismatch careful mode is turned OFF
+  Repeat resolution is enabled
+  MismatchCorrector will be SKIPPED
+  Coverage cutoff is turned OFF
+Other parameters:
+  Dir for temp files: /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/tmp
+  Threads: 16
+  Memory limit (in Gb): 94
+

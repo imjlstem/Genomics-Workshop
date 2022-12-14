@@ -1,0 +1,5 @@
+Writing filtered delta file /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/scaffolds.filter
+Reading delta file /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/scaffolds.delta
+Writing plot files /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/scaffolds.fplot, /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/scaffolds.rplot
+Writing gnuplot script /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/scaffolds.gp
+Rendering plot /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/scaffolds.html

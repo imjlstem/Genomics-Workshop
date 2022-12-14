@@ -1,0 +1,15 @@
+CORRECTION INPUTS:
+-----------------
+226 (input reads)
+1653061 (input bases)
+
+CORRECTION OUTPUTS:
+-----------------
+106 (reads that failed to generate any corrected bases)
+120 (corrected read pieces)
+827543 (corrected bases)
+
+PIECES PER READ:
+---------------
+0 pieces: 106
+1 pieces: 120

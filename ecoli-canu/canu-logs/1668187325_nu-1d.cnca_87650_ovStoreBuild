@@ -1,0 +1,11 @@
+Canu v1.6 (+0 commits) r0 .
+
+Current Working Directory:
+/home/taller-2048/GENOMICS_WORKSHOP/ecoli-canu/correction
+
+Command:
+/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/ovStoreBuild \
+  -O ./ecoli.ovlStore.BUILDING \
+  -G ./ecoli.gkpStore \
+  -M 2-8 \
+  -L ./1-overlapper/ovljob.files

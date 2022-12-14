@@ -1,0 +1,24 @@
+#!/bin/bash
+#SBATCH --job-name=RNAseq-gene-annotation
+#SBATCH --output=RNAseq-gene-annotation.out
+#SBATCH --partition=dribe
+#SBATCH --ntasks=72
+#SBATCH --time=72:00:00
+
+module load miniconda/3
+}
+minimap2 -PD -x asm5 -t 16 GCF_905147365.1_ilAriAges1.1_genomic.fna GCF_905220365.1_ilVanCard2.1_genomic.fna  > AriAges_VanCard.paf 
+
+update_blastdb.pl --showall > databases.txt
+
+
+date
+time 
+
+
+
+
+
+ 
+
+

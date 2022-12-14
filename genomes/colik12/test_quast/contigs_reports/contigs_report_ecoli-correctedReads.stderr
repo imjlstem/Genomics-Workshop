@@ -1,0 +1,5 @@
+Writing filtered delta file /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.filter
+Reading delta file /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.delta
+Writing plot files /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.fplot, /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/contigs_reports/nucmer_output/ecoli-correctedReads.rplot
+ERROR: No alignment data to plot
+1  Nothing aligned for /home/taller-2048/GENOMICS_WORKSHOP/coli_k-12/test_quast/quast_corrected_input/ecoli-correctedReads.fasta

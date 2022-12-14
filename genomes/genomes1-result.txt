@@ -1,0 +1,10 @@
+[M::mm_idx_gen::31.970*1.49] collected minimizers
+[M::mm_idx_gen::33.829*1.92] sorted minimizers
+[M::main::33.829*1.92] loaded/built the index for 25 target sequence(s)
+[M::mm_mapopt_update::35.253*1.89] mid_occ = 260
+[M::mm_idx_stat] kmer size: 19; skip: 19; is_hpc: 0; #seq: 25
+[M::mm_idx_stat::36.247*1.86] distinct minimizers: 27716643 (92.04% are singletons); average occurrences: 1.587; average spacing: 9.898
+[M::worker_pipeline::52.120*3.20] mapped 36 sequences
+[M::main] Version: 2.17-r941
+[M::main] CMD: minimap2 -PD -x asm5 -t 16 aricia/GCF_905147365.1_ilAriAges1.1_genomic.fna vanessa/GCF_905220365.1_ilVanCard2.1_genomic.fna
+[M::main] Real time: 52.586 sec; CPU: 167.427 sec; Peak RSS: 3.987 GB

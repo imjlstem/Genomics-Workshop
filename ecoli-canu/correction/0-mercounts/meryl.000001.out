@@ -1,0 +1,66 @@
+Computing 8 segments using 4 threads and 16MB memory (14MB if in one batch).
+  numMersActual      = 8318362
+  mersPerBatch       = 2079590
+  basesPerBatch      = 1041397
+  numBuckets         = 65536 (16 bits)
+  bucketPointerWidth = 20
+  merDataWidth       = 16
+Computing segment 1 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+Computing segment 5 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+Computing segment 3 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+Computing segment 7 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+ Creating bucket pointers.
+ Creating bucket pointers.
+ Creating bucket pointers.
+ Creating bucket pointers.
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+Segment 6 finished.
+Segment 4 finished.
+Segment 0 finished.
+Segment 2 finished.
+Computing segment 8 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+Computing segment 6 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+Computing segment 4 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+Computing segment 2 of 8.
+ Allocating 0MB for bucket pointer table (20 bits wide).
+ Allocating 0MB for counting the size of each bucket.
+ Creating bucket pointers.
+ Creating bucket pointers.
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+ Creating bucket pointers.
+ Creating bucket pointers.
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+ Releasing 0MB from counting the size of each bucket.
+ Allocating 1MB for mer storage (16 bits wide).
+Segment 3 finished.
+Segment 5 finished.
+Segment 1 finished.
+Segment 7 finished.
+Merge results.
+       2.10 Mmers --  3.57 Mmers/second       4.19 Mmers --  3.60 Mmers/second       6.29 Mmers --  3.60 Mmers/second       8.03 Mmers --  2.95 Mmers/second
+Can fit 3350649708 mers into table with prefix of 25 bits, using 3276.000MB (0.000MB for positions)

@@ -1,0 +1,12 @@
+gkMagic            = 0x504b473a756e6163
+gkVersion          = 0x0000000000000001
+
+gkLibrarySize      = 168
+gkReadSize         = 16
+gkMaxLibrariesBits = 6
+gkLibraryNameSize  = 128
+gkMaxReadBits      = 37
+gkMaxReadLenBits   = 21
+
+numLibraries       = 1
+numReads           = 120

@@ -1,0 +1,22 @@
+
+Starting file './ecoli.gkpStore.gkp'.
+
+  Loading reads from '/home/taller-2048/GENOMICS_WORKSHOP/ERR1674581.fastq'
+    Processed 5515 lines.
+    Loaded 8331171 bp from:
+      1103 FASTQ format reads (8331171 bp).
+    WARNING: 249 reads (22.5748%) with 95240 bp (1.1303%) were too short (< 1000bp) and were ignored.
+
+Finished with:
+  0 warnings (bad base or qv, too short, too long)
+
+Loaded into store:
+  8331171 bp.
+  854 reads.
+
+Skipped (too short):
+  95240 bp (1.1303%).
+  249 reads (22.5748%).
+
+
+gatekeeperCreate finished successfully.

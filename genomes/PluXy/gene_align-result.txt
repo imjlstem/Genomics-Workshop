@@ -1,0 +1,18 @@
+[M::mp_ntseq_read@4.417*0.97] read 323302761 bases in 33 contigs
+[M::mp_idx_build@4.418*0.97] 2525834 blocks
+[M::mp_idx_build@11.154*4.67] collected syncmers
+[M::mp_idx_build@14.127*3.90] 91728174 kmer-block pairs
+[M::mp_idx_print_stat] 1072866 distinct k-mers; mean occ of infrequent k-mers: 85.50; 0 frequent k-mers accounting for 0 occurrences
+[M::worker_pipeline::15.436*3.82] mapped 10 sequences
+[M::main] Version: 0.5-r181
+[M::main] CMD: miniprot -t8 --gff GCF_932276165.1_ilPluXylo3.1_genomic.fna Masc_multiSpecies_aa.fasta
+[M::main] Real time: 15.606 sec; CPU: 59.087 sec; Peak RSS: 2.003 GB
+[M::mp_ntseq_read@3.838*1.00] read 323302761 bases in 33 contigs
+[M::mp_idx_build@3.840*1.00] 2525834 blocks
+[M::mp_idx_build@11.011*5.21] collected syncmers
+[M::mp_idx_build@12.963*4.58] 94753800 kmer-block pairs
+[M::mp_idx_print_stat] 86960 distinct k-mers; mean occ of infrequent k-mers: 1089.00; 1 frequent k-mers accounting for 55379 occurrences
+[M::worker_pipeline::57.356*6.24] mapped 10 sequences
+[M::main] Version: 0.5-r181
+[M::main] CMD: miniprot -n 3 -s 3 -k 5 -l 3 -j 1 -t8 --gff GCF_932276165.1_ilPluXylo3.1_genomic.fna Masc_multiSpecies_aa.fasta
+[M::main] Real time: 57.490 sec; CPU: 357.953 sec; Peak RSS: 1.932 GB

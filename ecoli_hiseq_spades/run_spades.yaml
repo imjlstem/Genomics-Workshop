@@ -1,0 +1,150 @@
+- STAGE: Before start
+  args: []
+  config_dir: ''
+  del_after:
+  - tmp/hammer_zPqLdg
+  - .bin_reads
+  - tmp/spades_tRdbyj
+  - configs
+  output_files: []
+  path: 'true'
+  short_name: before_start
+- STAGE: Read error correction
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: ec_start
+- STAGE: Read error correction
+  args:
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/corrected/configs/config.info
+  config_dir: corrected
+  del_after:
+  - tmp/hammer_JapCfv
+  output_files:
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/corrected/corrected.yaml
+  path: /opt/bioinf/SPAdes-3.15.4/bin/spades-hammer
+  short_name: ec_runtool
+- STAGE: corrected reads compression
+  args:
+  - /opt/bioinf/SPAdes-3.15.4/share/spades/spades_pipeline/scripts/compress_all.py
+  - --input_file
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/corrected/corrected.yaml
+  - --ext_python_modules_home
+  - /opt/bioinf/SPAdes-3.15.4/share/spades
+  - --max_threads
+  - '16'
+  - --output_dir
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/corrected
+  - --gzip_output
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: /usr/bin/python
+  short_name: ec_compress
+- STAGE: Read error correction
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: ec_finish
+- STAGE: Assembling
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: as_start
+- STAGE: K21
+  args:
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K21/configs/config.info
+  config_dir: K21
+  del_after: []
+  output_files: []
+  path: /opt/bioinf/SPAdes-3.15.4/bin/spades-core
+  short_name: k21
+- STAGE: K33
+  args:
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K33/configs/config.info
+  config_dir: K33
+  del_after: []
+  output_files: []
+  path: /opt/bioinf/SPAdes-3.15.4/bin/spades-core
+  short_name: k33
+- STAGE: K55
+  args:
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K55/configs/config.info
+  config_dir: K55
+  del_after: []
+  output_files: []
+  path: /opt/bioinf/SPAdes-3.15.4/bin/spades-core
+  short_name: k55
+- STAGE: K77
+  args:
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/configs/config.info
+  config_dir: K77
+  del_after: []
+  output_files: []
+  path: /opt/bioinf/SPAdes-3.15.4/bin/spades-core
+  short_name: k77
+- STAGE: Copy files
+  args:
+  - /opt/bioinf/SPAdes-3.15.4/share/spades/spades_pipeline/scripts/copy_files.py
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/before_rr.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/before_rr.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/assembly_graph_after_simplification.gfa
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/assembly_graph_after_simplification.gfa
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/final_contigs.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/contigs.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/first_pe_contigs.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/first_pe_contigs.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/strain_graph.gfa
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/strain_graph.gfa
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/scaffolds.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/scaffolds.fasta
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/scaffolds.paths
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/scaffolds.paths
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/assembly_graph_with_scaffolds.gfa
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/assembly_graph_with_scaffolds.gfa
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/assembly_graph.fastg
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/assembly_graph.fastg
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/K77/final_contigs.paths
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/contigs.paths
+  config_dir: ''
+  del_after:
+  - .bin_reads
+  - tmp/spades_QcJihL
+  output_files: []
+  path: /usr/bin/python
+  short_name: copy_files
+- STAGE: Assembling
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: as_finish
+- STAGE: Breaking scaffolds
+  args:
+  - /opt/bioinf/SPAdes-3.15.4/share/spades/spades_pipeline/scripts/breaking_scaffolds_script.py
+  - --result_scaffolds_filename
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/scaffolds.fasta
+  - --misc_dir
+  - /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/misc
+  - --threshold_for_breaking_scaffolds
+  - '3'
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: /usr/bin/python
+  short_name: bs
+- STAGE: Terminate
+  args: []
+  config_dir: ''
+  del_after:
+  - configs
+  output_files: []
+  path: 'true'
+  short_name: terminate

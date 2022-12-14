@@ -1,0 +1,3774 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Gnuplot Canvas Graph</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+<script type="text/javascript" name="canvastext.js">
+        /*
+         * $Id: canvastext.js,v 1.3 2009/02/22 19:14:05 sfeam Exp $
+         */
+        // The canvastext.js code was released to the public domain by Jim Studt, 2007.
+        // He may keep some sort of up to date copy at http://www.federated.com/~jim/canvastext/
+        // Feb 2009 Ethan A Merritt (EAM) Modify code to work in non-ascii environments.
+        //
+        var CanvasTextFunctions = { };
+        
+        CanvasTextFunctions.letters = {
+            ' ': { width: 16, points: [] },
+            '!': { width: 10, points: [[5,21],[5,7],[-1,-1],[5,2],[4,1],[5,0],[6,1],[5,2]] },
+            '"': { width: 16, points: [[4,21],[4,14],[-1,-1],[12,21],[12,14]] },
+            '#': { width: 21, points: [[11,25],[4,-7],[-1,-1],[17,25],[10,-7],[-1,-1],[4,12],[18,12],[-1,-1],[3,6],[17,6]] },
+            '$': { width: 20, points: [[8,25],[8,-4],[-1,-1],[12,25],[12,-4],[-1,-1],[17,18],[15,20],[12,21],[8,21],[5,20],[3,18],[3,16],[4,14],[5,13],[7,12],[13,10],[15,9],[16,8],[17,6],[17,3],[15,1],[12,0],[8,0],[5,1],[3,3]] },
+            '%': { width: 24, points: [[21,21],[3,0],[-1,-1],[8,21],[10,19],[10,17],[9,15],[7,14],[5,14],[3,16],[3,18],[4,20],[6,21],[8,21],[10,20],[13,19],[16,19],[19,20],[21,21],[-1,-1],[17,7],[15,6],[14,4],[14,2],[16,0],[18,0],[20,1],[21,3],[21,5],[19,7],[17,7]] },
+            '&': { width: 26, points: [[23,12],[23,13],[22,14],[21,14],[20,13],[19,11],[17,6],[15,3],[13,1],[11,0],[7,0],[5,1],[4,2],[3,4],[3,6],[4,8],[5,9],[12,13],[13,14],[14,16],[14,18],[13,20],[11,21],[9,20],[8,18],[8,16],[9,13],[11,10],[16,3],[18,1],[20,0],[22,0],[23,1],[23,2]] },
+            '\'': { width: 10, points: [[5,19],[4,20],[5,21],[6,20],[6,18],[5,16],[4,15]] },
+            '(': { width: 14, points: [[11,25],[9,23],[7,20],[5,16],[4,11],[4,7],[5,2],[7,-2],[9,-5],[11,-7]] },
+            ')': { width: 14, points: [[3,25],[5,23],[7,20],[9,16],[10,11],[10,7],[9,2],[7,-2],[5,-5],[3,-7]] },
+            '*': { width: 16, points: [[8,21],[8,9],[-1,-1],[3,18],[13,12],[-1,-1],[13,18],[3,12]] },
+            '+': { width: 26, points: [[13,18],[13,0],[-1,-1],[4,9],[22,9]] },
+            ',': { width: 10, points: [[6,1],[5,0],[4,1],[5,2],[6,1],[6,-1],[5,-3],[4,-4]] },
+            '-': { width: 26, points: [[4,9],[22,9]] },
+            '.': { width: 10, points: [[5,2],[4,1],[5,0],[6,1],[5,2]] },
+            '/': { width: 22, points: [[20,25],[2,-7]] },
+            '0': { width: 20, points: [[9,21],[6,20],[4,17],[3,12],[3,9],[4,4],[6,1],[9,0],[11,0],[14,1],[16,4],[17,9],[17,12],[16,17],[14,20],[11,21],[9,21]] },
+            '1': { width: 20, points: [[6,17],[8,18],[11,21],[11,0]] },
+            '2': { width: 20, points: [[4,16],[4,17],[5,19],[6,20],[8,21],[12,21],[14,20],[15,19],[16,17],[16,15],[15,13],[13,10],[3,0],[17,0]] },
+            '3': { width: 20, points: [[5,21],[16,21],[10,13],[13,13],[15,12],[16,11],[17,8],[17,6],[16,3],[14,1],[11,0],[8,0],[5,1],[4,2],[3,4]] },
+            '4': { width: 20, points: [[13,21],[3,7],[18,7],[-1,-1],[13,21],[13,0]] },
+            '5': { width: 20, points: [[15,21],[5,21],[4,12],[5,13],[8,14],[11,14],[14,13],[16,11],[17,8],[17,6],[16,3],[14,1],[11,0],[8,0],[5,1],[4,2],[3,4]] },
+            '6': { width: 20, points: [[16,18],[15,20],[12,21],[10,21],[7,20],[5,17],[4,12],[4,7],[5,3],[7,1],[10,0],[11,0],[14,1],[16,3],[17,6],[17,7],[16,10],[14,12],[11,13],[10,13],[7,12],[5,10],[4,7]] },
+            '7': { width: 20, points: [[17,21],[7,0],[-1,-1],[3,21],[17,21]] },
+            '8': { width: 20, points: [[8,21],[5,20],[4,18],[4,16],[5,14],[7,13],[11,12],[14,11],[16,9],[17,7],[17,4],[16,2],[15,1],[12,0],[8,0],[5,1],[4,2],[3,4],[3,7],[4,9],[6,11],[9,12],[13,13],[15,14],[16,16],[16,18],[15,20],[12,21],[8,21]] },
+            '9': { width: 20, points: [[16,14],[15,11],[13,9],[10,8],[9,8],[6,9],[4,11],[3,14],[3,15],[4,18],[6,20],[9,21],[10,21],[13,20],[15,18],[16,14],[16,9],[15,4],[13,1],[10,0],[8,0],[5,1],[4,3]] },
+            ':': { width: 10, points: [[5,14],[4,13],[5,12],[6,13],[5,14],[-1,-1],[5,2],[4,1],[5,0],[6,1],[5,2]] },
+            ';': { width: 10, points: [[5,14],[4,13],[5,12],[6,13],[5,14],[-1,-1],[6,1],[5,0],[4,1],[5,2],[6,1],[6,-1],[5,-3],[4,-4]] },
+            '<': { width: 24, points: [[20,18],[4,9],[20,0]] },
+            '=': { width: 26, points: [[4,12],[22,12],[-1,-1],[4,6],[22,6]] },
+            '>': { width: 24, points: [[4,18],[20,9],[4,0]] },
+            '?': { width: 18, points: [[3,16],[3,17],[4,19],[5,20],[7,21],[11,21],[13,20],[14,19],[15,17],[15,15],[14,13],[13,12],[9,10],[9,7],[-1,-1],[9,2],[8,1],[9,0],[10,1],[9,2]] },
+            '@': { width: 27, points: [[18,13],[17,15],[15,16],[12,16],[10,15],[9,14],[8,11],[8,8],[9,6],[11,5],[14,5],[16,6],[17,8],[-1,-1],[12,16],[10,14],[9,11],[9,8],[10,6],[11,5],[-1,-1],[18,16],[17,8],[17,6],[19,5],[21,5],[23,7],[24,10],[24,12],[23,15],[22,17],[20,19],[18,20],[15,21],[12,21],[9,20],[7,19],[5,17],[4,15],[3,12],[3,9],[4,6],[5,4],[7,2],[9,1],[12,0],[15,0],[18,1],[20,2],[21,3],[-1,-1],[19,16],[18,8],[18,6],[19,5]] },
+            'A': { width: 18, points: [[9,21],[1,0],[-1,-1],[9,21],[17,0],[-1,-1],[4,7],[14,7]] },
+            'B': { width: 21, points: [[4,21],[4,0],[-1,-1],[4,21],[13,21],[16,20],[17,19],[18,17],[18,15],[17,13],[16,12],[13,11],[-1,-1],[4,11],[13,11],[16,10],[17,9],[18,7],[18,4],[17,2],[16,1],[13,0],[4,0]] },
+            'C': { width: 21, points: [[18,16],[17,18],[15,20],[13,21],[9,21],[7,20],[5,18],[4,16],[3,13],[3,8],[4,5],[5,3],[7,1],[9,0],[13,0],[15,1],[17,3],[18,5]] },
+            'D': { width: 21, points: [[4,21],[4,0],[-1,-1],[4,21],[11,21],[14,20],[16,18],[17,16],[18,13],[18,8],[17,5],[16,3],[14,1],[11,0],[4,0]] },
+            'E': { width: 19, points: [[4,21],[4,0],[-1,-1],[4,21],[17,21],[-1,-1],[4,11],[12,11],[-1,-1],[4,0],[17,0]] },
+            'F': { width: 18, points: [[4,21],[4,0],[-1,-1],[4,21],[17,21],[-1,-1],[4,11],[12,11]] },
+            'G': { width: 21, points: [[18,16],[17,18],[15,20],[13,21],[9,21],[7,20],[5,18],[4,16],[3,13],[3,8],[4,5],[5,3],[7,1],[9,0],[13,0],[15,1],[17,3],[18,5],[18,8],[-1,-1],[13,8],[18,8]] },
+            'H': { width: 22, points: [[4,21],[4,0],[-1,-1],[18,21],[18,0],[-1,-1],[4,11],[18,11]] },
+            'I': { width: 8, points: [[4,21],[4,0]] },
+            'J': { width: 16, points: [[12,21],[12,5],[11,2],[10,1],[8,0],[6,0],[4,1],[3,2],[2,5],[2,7]] },
+            'K': { width: 21, points: [[4,21],[4,0],[-1,-1],[18,21],[4,7],[-1,-1],[9,12],[18,0]] },
+            'L': { width: 17, points: [[4,21],[4,0],[-1,-1],[4,0],[16,0]] },
+            'M': { width: 24, points: [[4,21],[4,0],[-1,-1],[4,21],[12,0],[-1,-1],[20,21],[12,0],[-1,-1],[20,21],[20,0]] },
+            'N': { width: 22, points: [[4,21],[4,0],[-1,-1],[4,21],[18,0],[-1,-1],[18,21],[18,0]] },
+            'O': { width: 22, points: [[9,21],[7,20],[5,18],[4,16],[3,13],[3,8],[4,5],[5,3],[7,1],[9,0],[13,0],[15,1],[17,3],[18,5],[19,8],[19,13],[18,16],[17,18],[15,20],[13,21],[9,21]] },
+            'P': { width: 21, points: [[4,21],[4,0],[-1,-1],[4,21],[13,21],[16,20],[17,19],[18,17],[18,14],[17,12],[16,11],[13,10],[4,10]] },
+            'Q': { width: 22, points: [[9,21],[7,20],[5,18],[4,16],[3,13],[3,8],[4,5],[5,3],[7,1],[9,0],[13,0],[15,1],[17,3],[18,5],[19,8],[19,13],[18,16],[17,18],[15,20],[13,21],[9,21],[-1,-1],[12,4],[18,-2]] },
+            'R': { width: 21, points: [[4,21],[4,0],[-1,-1],[4,21],[13,21],[16,20],[17,19],[18,17],[18,15],[17,13],[16,12],[13,11],[4,11],[-1,-1],[11,11],[18,0]] },
+            'S': { width: 20, points: [[17,18],[15,20],[12,21],[8,21],[5,20],[3,18],[3,16],[4,14],[5,13],[7,12],[13,10],[15,9],[16,8],[17,6],[17,3],[15,1],[12,0],[8,0],[5,1],[3,3]] },
+            'T': { width: 16, points: [[8,21],[8,0],[-1,-1],[1,21],[15,21]] },
+            'U': { width: 22, points: [[4,21],[4,6],[5,3],[7,1],[10,0],[12,0],[15,1],[17,3],[18,6],[18,21]] },
+            'V': { width: 18, points: [[1,21],[9,0],[-1,-1],[17,21],[9,0]] },
+            'W': { width: 24, points: [[2,21],[7,0],[-1,-1],[12,21],[7,0],[-1,-1],[12,21],[17,0],[-1,-1],[22,21],[17,0]] },
+            'X': { width: 20, points: [[3,21],[17,0],[-1,-1],[17,21],[3,0]] },
+            'Y': { width: 18, points: [[1,21],[9,11],[9,0],[-1,-1],[17,21],[9,11]] },
+            'Z': { width: 20, points: [[17,21],[3,0],[-1,-1],[3,21],[17,21],[-1,-1],[3,0],[17,0]] },
+            '[': { width: 14, points: [[4,25],[4,-7],[-1,-1],[5,25],[5,-7],[-1,-1],[4,25],[11,25],[-1,-1],[4,-7],[11,-7]] },
+            '\\': { width: 14, points: [[0,21],[14,-3]] },
+            ']': { width: 14, points: [[9,25],[9,-7],[-1,-1],[10,25],[10,-7],[-1,-1],[3,25],[10,25],[-1,-1],[3,-7],[10,-7]] },
+            '^': { width: 16, points: [[5,15],[8,19],[11,15],[-1,-1],[2,12],[8,18],[14,12]] },
+            '_': { width: 16, points: [[0,-2],[16,-2]] },
+            '`': { width: 10, points: [[6,21],[5,20],[4,18],[4,16],[5,15],[6,16],[5,17]] },
+            'a': { width: 19, points: [[15,14],[15,0],[-1,-1],[15,11],[13,13],[11,14],[8,14],[6,13],[4,11],[3,8],[3,6],[4,3],[6,1],[8,0],[11,0],[13,1],[15,3]] },
+            'b': { width: 19, points: [[4,21],[4,0],[-1,-1],[4,11],[6,13],[8,14],[11,14],[13,13],[15,11],[16,8],[16,6],[15,3],[13,1],[11,0],[8,0],[6,1],[4,3]] },
+            'c': { width: 18, points: [[15,11],[13,13],[11,14],[8,14],[6,13],[4,11],[3,8],[3,6],[4,3],[6,1],[8,0],[11,0],[13,1],[15,3]] },
+            'd': { width: 19, points: [[15,21],[15,0],[-1,-1],[15,11],[13,13],[11,14],[8,14],[6,13],[4,11],[3,8],[3,6],[4,3],[6,1],[8,0],[11,0],[13,1],[15,3]] },
+            'e': { width: 18, points: [[3,8],[15,8],[15,10],[14,12],[13,13],[11,14],[8,14],[6,13],[4,11],[3,8],[3,6],[4,3],[6,1],[8,0],[11,0],[13,1],[15,3]] },
+            'f': { width: 12, points: [[10,21],[8,21],[6,20],[5,17],[5,0],[-1,-1],[2,14],[9,14]] },
+            'g': { width: 19, points: [[15,14],[15,-2],[14,-5],[13,-6],[11,-7],[8,-7],[6,-6],[-1,-1],[15,11],[13,13],[11,14],[8,14],[6,13],[4,11],[3,8],[3,6],[4,3],[6,1],[8,0],[11,0],[13,1],[15,3]] },
+            'h': { width: 19, points: [[4,21],[4,0],[-1,-1],[4,10],[7,13],[9,14],[12,14],[14,13],[15,10],[15,0]] },
+            'i': { width: 8, points: [[3,21],[4,20],[5,21],[4,22],[3,21],[-1,-1],[4,14],[4,0]] },
+            'j': { width: 10, points: [[5,21],[6,20],[7,21],[6,22],[5,21],[-1,-1],[6,14],[6,-3],[5,-6],[3,-7],[1,-7]] },
+            'k': { width: 17, points: [[4,21],[4,0],[-1,-1],[14,14],[4,4],[-1,-1],[8,8],[15,0]] },
+            'l': { width: 8, points: [[4,21],[4,0]] },
+            'm': { width: 30, points: [[4,14],[4,0],[-1,-1],[4,10],[7,13],[9,14],[12,14],[14,13],[15,10],[15,0],[-1,-1],[15,10],[18,13],[20,14],[23,14],[25,13],[26,10],[26,0]] },
+            'n': { width: 19, points: [[4,14],[4,0],[-1,-1],[4,10],[7,13],[9,14],[12,14],[14,13],[15,10],[15,0]] },
+            'o': { width: 19, points: [[8,14],[6,13],[4,11],[3,8],[3,6],[4,3],[6,1],[8,0],[11,0],[13,1],[15,3],[16,6],[16,8],[15,11],[13,13],[11,14],[8,14]] },
+            'p': { width: 19, points: [[4,14],[4,-7],[-1,-1],[4,11],[6,13],[8,14],[11,14],[13,13],[15,11],[16,8],[16,6],[15,3],[13,1],[11,0],[8,0],[6,1],[4,3]] },
+            'q': { width: 19, points: [[15,14],[15,-7],[-1,-1],[15,11],[13,13],[11,14],[8,14],[6,13],[4,11],[3,8],[3,6],[4,3],[6,1],[8,0],[11,0],[13,1],[15,3]] },
+            'r': { width: 13, points: [[4,14],[4,0],[-1,-1],[4,8],[5,11],[7,13],[9,14],[12,14]] },
+            's': { width: 17, points: [[14,11],[13,13],[10,14],[7,14],[4,13],[3,11],[4,9],[6,8],[11,7],[13,6],[14,4],[14,3],[13,1],[10,0],[7,0],[4,1],[3,3]] },
+            't': { width: 12, points: [[5,21],[5,4],[6,1],[8,0],[10,0],[-1,-1],[2,14],[9,14]] },
+            'u': { width: 19, points: [[4,14],[4,4],[5,1],[7,0],[10,0],[12,1],[15,4],[-1,-1],[15,14],[15,0]] },
+            'v': { width: 16, points: [[2,14],[8,0],[-1,-1],[14,14],[8,0]] },
+            'w': { width: 22, points: [[3,14],[7,0],[-1,-1],[11,14],[7,0],[-1,-1],[11,14],[15,0],[-1,-1],[19,14],[15,0]] },
+            'x': { width: 17, points: [[3,14],[14,0],[-1,-1],[14,14],[3,0]] },
+            'y': { width: 16, points: [[2,14],[8,0],[-1,-1],[14,14],[8,0],[6,-4],[4,-6],[2,-7],[1,-7]] },
+            'z': { width: 17, points: [[14,14],[3,0],[-1,-1],[3,14],[14,14],[-1,-1],[3,0],[14,0]] },
+            '{': { width: 14, points: [[9,25],[7,24],[6,23],[5,21],[5,19],[6,17],[7,16],[8,14],[8,12],[6,10],[-1,-1],[7,24],[6,22],[6,20],[7,18],[8,17],[9,15],[9,13],[8,11],[4,9],[8,7],[9,5],[9,3],[8,1],[7,0],[6,-2],[6,-4],[7,-6],[-1,-1],[6,8],[8,6],[8,4],[7,2],[6,1],[5,-1],[5,-3],[6,-5],[7,-6],[9,-7]] },
+            '|': { width: 8, points: [[4,25],[4,-7]] },
+            '}': { width: 14, points: [[5,25],[7,24],[8,23],[9,21],[9,19],[8,17],[7,16],[6,14],[6,12],[8,10],[-1,-1],[7,24],[8,22],[8,20],[7,18],[6,17],[5,15],[5,13],[6,11],[10,9],[6,7],[5,5],[5,3],[6,1],[7,0],[8,-2],[8,-4],[7,-6],[-1,-1],[8,8],[6,6],[6,4],[7,2],[8,1],[9,-1],[9,-3],[8,-5],[7,-6],[5,-7]] },
+            '~': { width: 24, points: [[3,6],[3,8],[4,11],[6,12],[8,12],[10,11],[14,8],[16,7],[18,7],[20,8],[21,10],[-1,-1],[3,8],[4,10],[6,11],[8,11],[10,10],[14,7],[16,6],[18,6],[20,7],[21,10],[21,12]] },
+        
+        // Miscellaneous glyphs (EAM)
+        129: { width: 18, points: [[2,-2],[2,21],[16,21],[16,-2],[2,-2]] },
+        176: { width: 8, points: [[3,22],[1,20],[1,18],[3,16],[5,16],[7,18],[7,20],[5,22],[3,22]]},
+        197: { width: 18, points: [[9,18],[1,0],[-1,-1],[9,18],[17,0],[-1,-1],[4,7],[14,7],[-1,-1], [8,22],[6,20],[6,18],[8,16],[10,16],[12,18],[12,20],[10,22],[8,22]]},
+        215: { width: 26, points: [[6,17],[20,3],[-1,-1],[6,3],[20,17]] }
+        };
+        
+        CanvasTextFunctions.letter = function (ch)
+        {
+            glyph = CanvasTextFunctions.letters[ch];
+        
+            // EAM - Draw an empty box for undefined glyphs
+            if (glyph == undefined)
+        	glyph = CanvasTextFunctions.letters[129];
+        
+            return glyph;
+        }
+        
+        CanvasTextFunctions.ascent = function( font, size)
+        {
+            return size;
+        }
+        
+        CanvasTextFunctions.descent = function( font, size)
+        {
+            return 7.0*size/25.0;
+        }
+        
+        CanvasTextFunctions.measure = function( font, size, str)
+        {
+            var total = 0;
+            var len = str.length;
+        
+            for ( i = 0; i < len; i++) {
+                var index = str.charAt(i);
+        	// EAM deal with non-ascii characaters
+        	if (index > '~')
+        	    index = str.charCodeAt(i);
+        
+        	var c = CanvasTextFunctions.letter(index);
+        	if (c) total += c.width * size / 25.0;
+            }
+            return total;
+        }
+        
+        CanvasTextFunctions.draw = function(ctx,font,size,x,y,str)
+        {
+            var total = 0;
+            var len = str.length;
+            var mag = size / 25.0;
+        
+            ctx.save();
+            ctx.lineCap = "round";
+            ctx.lineWidth = 2.0 * mag;
+        
+            for ( i = 0; i < len; i++) {
+                var index = str.charAt(i);
+        	// EAM deal with non-ascii characaters
+        	if (index > '~')
+        	    index = str.charCodeAt(i);
+        
+        	var c = CanvasTextFunctions.letter(index);
+        	if ( !c) continue;
+        
+        	ctx.beginPath();
+        
+        	var penUp = 1;
+        	var needStroke = 0;
+        	for ( j = 0; j < c.points.length; j++) {
+        	    var a = c.points[j];
+        	    if ( a[0] == -1 && a[1] == -1) {
+        		penUp = 1;
+        		continue;
+        	    }
+        	    if ( penUp) {
+        		ctx.moveTo( x + a[0]*mag, y - a[1]*mag);
+        		penUp = false;
+        	    } else {
+        		ctx.lineTo( x + a[0]*mag, y - a[1]*mag);
+        	    }
+        	}
+        	ctx.stroke();
+        	x += c.width*mag;
+            }
+            ctx.restore();
+            return total;
+        }
+        
+        CanvasTextFunctions.enable = function( ctx)
+        {
+            ctx.drawText = function(font,size,x,y,text) { return CanvasTextFunctions.draw( ctx, font,size,x,y,text); };
+            ctx.measureText = function(font,size,text) { return CanvasTextFunctions.measure( font,size,text); };
+            ctx.fontAscent = function(font,size) { return CanvasTextFunctions.ascent(font,size); }
+            ctx.fontDescent = function(font,size) { return CanvasTextFunctions.descent(font,size); }
+        
+            ctx.drawTextRight = function(font,size,x,y,text) { 
+        	var w = CanvasTextFunctions.measure(font,size,text);
+        	return CanvasTextFunctions.draw( ctx, font,size,x-w,y,text); 
+            };
+            ctx.drawTextCenter = function(font,size,x,y,text) { 
+        	var w = CanvasTextFunctions.measure(font,size,text);
+        	return CanvasTextFunctions.draw( ctx, font,size,x-w/2,y,text); 
+            };
+        }
+        
+        
+    </script>
+<script type="text/javascript" name="gnuplot_common.js">
+        /*
+         * $Id: gnuplot_common.js,v 1.10 2012/05/03 20:35:22 sfeam Exp $
+         */
+        // Shared routines for gnuplot's HTML5 canvas terminal driver.
+        
+        var gnuplot = { };
+        
+        gnuplot.common_version = "3 May 2012";
+        
+        gnuplot.L = function (x,y) {
+          if (gnuplot.zoomed) {
+            var zoom = gnuplot.zoomXY(x/10.0,y/10.0);
+            ctx.lineTo(zoom.x,zoom.y);
+          } else
+            ctx.lineTo(x/10.0,y/10.0);
+        }
+        gnuplot.M = function (x,y) {
+          if (gnuplot.zoomed) {
+            var zoom = gnuplot.zoomXY(x/10.0,y/10.0);
+            ctx.moveTo(zoom.x,zoom.y);
+          } else
+            ctx.moveTo(x/10.0,y/10.0);
+        }
+        gnuplot.R = function (x,y,w,h) {
+          if (gnuplot.zoomed) {
+            var dx, dy, dw, dh;
+            var zoom = gnuplot.zoomXY(x/10.0,y/10.0);
+            if (zoom.x >= gnuplot.plot_xmax) return;
+            if (zoom.y >= gnuplot.plot_ybot) return;
+            dx = zoom.x; dy = zoom.y;
+            zoom = gnuplot.zoomXY((x+w)/10.,(y+h)/10.);
+            if (zoom.xraw <= gnuplot.plot_xmin) return;
+            if (zoom.yraw <= gnuplot.plot_ytop) return;
+            dw = zoom.x - dx; dh = zoom.y -dy;
+            ctx.fillRect(dx, dy, dw, dh);
+          } else
+            ctx.fillRect(x/10.0, y/10.0, w/10.0, h/10.0);
+        }
+        gnuplot.T = function (x,y,fontsize,justify,string) {
+          var xx = x/10.0; var yy = y/10.0;
+          if (gnuplot.zoomed) {
+            var zoom = gnuplot.zoomXY(xx,yy);
+            if (zoom.clip) return;
+            xx = zoom.x; yy = zoom.y;
+            if (gnuplot.plot_xmin < xx && xx < gnuplot.plot_xmax && gnuplot.plot_ybot > yy && yy > gnuplot.plot_ytop)
+              if ((typeof(gnuplot.zoom_text) != "undefined") && (gnuplot.zoom_text == true))
+        	fontsize = Math.sqrt(gnuplot.zoomW(fontsize)*gnuplot.zoomH(fontsize));
+          }
+          if (justify=="") ctx.drawText("sans", fontsize, xx, yy, string);
+          else if (justify=="Right") ctx.drawTextRight("sans", fontsize, xx, yy, string);
+          else if (justify=="Center") ctx.drawTextCenter("sans", fontsize, xx, yy, string);
+        }
+        gnuplot.TR = function (x,y,angle,fontsize,justify,string) {
+          var xx = x/10.0; var yy = y/10.0;
+          if (gnuplot.zoomed) {
+            var zoom = gnuplot.zoomXY(xx,yy);
+            if (zoom.clip) return;
+            xx = zoom.x; yy = zoom.y;
+            if (gnuplot.plot_xmin < xx && xx < gnuplot.plot_xmax && gnuplot.plot_ybot > yy && yy > gnuplot.plot_ytop)
+              if ((typeof(gnuplot.zoom_text) != "undefined") && (gnuplot.zoom_text == true))
+        	fontsize = Math.sqrt(gnuplot.zoomW(fontsize)*gnuplot.zoomH(fontsize));
+          }
+          ctx.save();
+          ctx.translate(xx,yy);
+          ctx.rotate(angle * Math.PI / 180);
+          if (justify=="") ctx.drawText("sans", fontsize, 0, 0, string);
+          else if (justify=="Right") ctx.drawTextRight("sans", fontsize, 0, 0, string);
+          else if (justify=="Center") ctx.drawTextCenter("sans", fontsize, 0, 0, string);
+          ctx.restore();
+        }
+        gnuplot.bp = function (x,y) // begin polygon
+            { ctx.beginPath(); gnuplot.M(x,y); }
+        gnuplot.cfp = function () // close and fill polygon
+            { ctx.closePath(); ctx.fill(); }
+        gnuplot.cfsp = function () // close and fill polygon with stroke color
+            { ctx.closePath(); ctx.fillStyle = ctx.strokeStyle; ctx.stroke(); ctx.fill(); }
+        gnuplot.Dot = function (x,y) {
+            var xx = x; var yy = y;
+            if (gnuplot.zoomed) {zoom = gnuplot.zoomXY(xx,yy); xx = zoom.x; yy = zoom.y; if (zoom.clip) return;}
+            ctx.strokeRect(xx,yy,0.5,0.5);
+        }
+        gnuplot.Pt = function (N,x,y,w) {
+            var xx = x; var yy = y;
+            if (gnuplot.zoomed) {var zoom = gnuplot.zoomXY(xx,yy); xx = zoom.x; yy = zoom.y; if (zoom.clip) return;}
+            if (w==0) return;
+            switch (N)
+            {
+            case 0:
+        	ctx.beginPath();
+        	ctx.moveTo(xx-w,yy); ctx.lineTo(xx+w,yy);
+        	ctx.moveTo(xx,yy-w); ctx.lineTo(xx,yy+w);
+        	ctx.stroke();
+        	break;
+            case 1:
+        	var ww = w * 3/4;
+        	ctx.beginPath();
+        	ctx.moveTo(xx-ww,yy-ww); ctx.lineTo(xx+ww,yy+ww);
+        	ctx.moveTo(xx+ww,yy-ww); ctx.lineTo(xx-ww,yy+ww);
+        	ctx.stroke();
+        	break;
+            case 2:
+        	gnuplot.Pt(0,x,y,w); gnuplot.Pt(1,x,y,w);
+        	break;
+            case 3:
+        	ctx.strokeRect(xx-w/2,yy-w/2,w,w);
+        	break;
+            case 4:
+        	ctx.save(); ctx.strokeRect(xx-w/2,yy-w/2,w,w); ctx.restore();
+        	ctx.fillRect(xx-w/2,yy-w/2,w,w);
+        	break;
+            case 5:
+        	ctx.beginPath(); ctx.arc(xx,yy,w/2,0,Math.PI*2,true); ctx.stroke();
+        	break;
+            default:
+            case 6:
+        	ctx.beginPath(); ctx.arc(xx,yy,w/2,0,Math.PI*2,true); ctx.fill();
+        	break;
+            case 7:
+        	ctx.beginPath();
+        	ctx.moveTo(xx,yy-w); ctx.lineTo(xx-w,yy+w/2); ctx.lineTo(xx+w,yy+w/2);
+        	ctx.closePath();
+        	ctx.stroke();
+        	break;
+            case 8:
+        	ctx.beginPath();
+        	ctx.moveTo(xx,yy-w); ctx.lineTo(xx-w,yy+w/2); ctx.lineTo(xx+w,yy+w/2);
+        	ctx.closePath();
+        	ctx.fill();
+        	break;
+            }
+        }
+        
+        // Zoomable image
+        gnuplot.ZI = function (image, m, n, x1, y1, x2, y2) {
+          if (gnuplot.zoomed) {
+            var sx, sy, sw, sh, dx, dy, dw, dh;
+        
+            var zoom = gnuplot.zoomXY(x1/10.0,y1/10.0);
+            if (zoom.x >= gnuplot.plot_xmax) return;
+            if (zoom.y >= gnuplot.plot_ybot) return;
+            x1raw = zoom.xraw; y1raw = zoom.yraw;
+            dx = zoom.x; dy = zoom.y;
+        
+            zoom = gnuplot.zoomXY((x2)/10.,(y2)/10.);
+            if (zoom.xraw <= gnuplot.plot_xmin) return;
+            if (zoom.yraw <= gnuplot.plot_ytop) return;
+            var x2raw = zoom.xraw; var y2raw = zoom.yraw;
+            dw = zoom.x - dx;  dh = zoom.y - dy;
+        
+            // FIXME: This is sometimes flaky. Needs integer truncation?
+            sx = 0; sy = 0; sw = m; sh = n;
+            if (x1raw < dx) sx = m * (dx - x1raw) / (x2raw - x1raw);
+            if (y1raw < dy) sy = n * (dy - y1raw) / (y2raw - y1raw);
+            if (x2raw > zoom.x)
+        	sw = m * (1. - ((x2raw - zoom.x) / (x2raw - x1raw)));
+            if (y2raw > zoom.y)
+        	sh = n * (1. - ((y2raw - zoom.y) / (y2raw - y1raw)));
+            sw = sw - sx; sh = sh - sy;
+        
+            ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
+        } else
+            ctx.drawImage(image, x1/10.0, y1/10.0, (x2-x1)/10.0, (y2-y1)/10.0);
+        }
+        
+        // These methods are place holders that are loaded by gnuplot_dashedlines.js
+        
+        gnuplot.dashtype  = function (dt) {} ;
+        gnuplot.dashstart = function (x,y) {gnuplot.M(x,y);} ;
+        gnuplot.dashstep  = function (x,y) {gnuplot.L(x,y);} ;
+        gnuplot.pattern   = [];
+        
+    </script>
+<script type="text/javascript" name="gnuplot_dashedlines.js">
+        /*
+         * $Id: gnuplot_dashedlines.js,v 1.3 2012/05/03 20:35:22 sfeam Exp $
+         */
+        /*
+         * Ethan Merritt November 2010
+         * Add a dashed line method to gnuplot's HTML5 canvas toolset.
+         * To start a path use DS(x0,y0) instead of M(x0,y0)
+         * To draw line segments use DL(x,y) instead of L(x,y)
+         * Finish as usual with ctx.stroke(); ctx.closePath();
+         */
+        
+        gnuplot.solid = [];
+        gnuplot.dashpattern1 = gnuplot.solid;
+        gnuplot.dashpattern2 = [ 0.5, 1.0 ];
+        gnuplot.dashpattern3 = [ .12, .25, .37, .50, .62, .75, .87, 1.0 ];
+        gnuplot.dashpattern4 = [ 0.50, 0.70, 0.80, 1.0 ];
+        gnuplot.dashpattern5 = [ 0.30, 0.50, 0.60, 0.75, 0.85, 1.0 ];
+        
+        gnuplot.dashlength = 200.;	// length of one complete pattern
+        gnuplot.dashfraction = 0;	// how far in the pattern we got last time
+        gnuplot.dash_x = 0;
+        gnuplot.dash_y = 0;
+        
+        gnuplot.dashtype = function(dt) {
+            gnuplot.pattern = dt;
+        }
+        
+        gnuplot.dashstart = function(x,y) {
+            gnuplot.dash_x = x;
+            gnuplot.dash_y = y;
+            gnuplot.dashfraction  = 0;
+            gnuplot.M(x,y);
+        }
+        
+        gnuplot.dashstep = function(x,y) {
+            var delx = x - gnuplot.dash_x;
+            var dely = y - gnuplot.dash_y;
+            var stride = Math.sqrt(delx*delx + dely*dely) / gnuplot.dashlength;
+            var this_step; var new_x, new_y;
+        
+            if (gnuplot.pattern.length == 0) {gnuplot.L(x,y); return;}
+        
+            while (stride > 0) {
+                // Find which piece of the pattern we are in
+        	for (i=0; gnuplot.pattern[i] <= gnuplot.dashfraction; i++);
+        
+        	this_step = gnuplot.pattern[i] - gnuplot.dashfraction;
+        	if (stride > this_step) {
+                    new_x = gnuplot.dash_x + delx*this_step/stride;
+                    new_y = gnuplot.dash_y + dely*this_step/stride;
+        	    stride = stride - this_step;
+        	    gnuplot.dashfraction = gnuplot.pattern[i];
+                    delx = x - new_x;
+                    dely = y - new_y;
+        	} else {
+        	    new_x = x;
+        	    new_y = y;
+        	    gnuplot.dashfraction = gnuplot.dashfraction + stride;
+        	    stride = 0;
+        	}
+        	if (i%2==0) gnuplot.L(new_x,new_y);
+        	else gnuplot.M(new_x,new_y);
+        
+        	gnuplot.dash_x = new_x;
+        	gnuplot.dash_y = new_y;
+        	if (gnuplot.dashfraction >= 1.0) gnuplot.dashfraction = 0;
+            }
+        }
+        
+    </script>
+<script type="text/javascript">gnuplot.init = function() {};</script>
+<script type="text/javascript">
+var canvas, ctx;
+gnuplot.grid_lines = true;
+gnuplot.zoomed = false;
+gnuplot.active_plot_name = "gnuplot_canvas";
+
+function gnuplot_canvas() {
+canvas = document.getElementById("gnuplot_canvas");
+ctx = canvas.getContext("2d");
+// Gnuplot version 5.0.5
+// short forms of commands provided by gnuplot_common.js
+function DT  (dt)  {gnuplot.dashtype(dt);};
+function DS  (x,y) {gnuplot.dashstart(x,y);};
+function DL  (x,y) {gnuplot.dashstep(x,y);};
+function M   (x,y) {if (gnuplot.pattern.length > 0) DS(x,y); else gnuplot.M(x,y);};
+function L   (x,y) {if (gnuplot.pattern.length > 0) DL(x,y); else gnuplot.L(x,y);};
+function Dot (x,y) {gnuplot.Dot(x/10.,y/10.);};
+function Pt  (N,x,y,w) {gnuplot.Pt(N,x/10.,y/10.,w/10.);};
+function R   (x,y,w,h) {gnuplot.R(x,y,w,h);};
+function T   (x,y,fontsize,justify,string) {gnuplot.T(x,y,fontsize,justify,string);};
+function TR  (x,y,angle,fontsize,justify,string) {gnuplot.TR(x,y,angle,fontsize,justify,string);};
+function bp  (x,y) {gnuplot.bp(x,y);};
+function cfp () {gnuplot.cfp();};
+function cfsp() {gnuplot.cfsp();};
+
+gnuplot.hypertext_list = [];
+gnuplot.on_hypertext = -1;
+function Hypertext(x,y,w,text) {
+    newtext = {x:x, y:y, w:w, text:text};
+    gnuplot.hypertext_list.push(newtext);
+}
+gnuplot.dashlength = 400;
+ctx.lineCap = "round"; ctx.lineJoin = "round";
+CanvasTextFunctions.enable(ctx);
+ctx.strokeStyle = "rgb(215,215,215)";
+ctx.lineWidth = 1;
+
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,3680);
+L(4939,3680);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,3680);
+M(4939,3680);
+ctx.stroke();
+ctx.closePath();
+ctx.fillStyle = "rgb(000,000,000)";
+T(780,3730,10.0,"Right","0");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,3236);
+L(4939,3236);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,3236);
+M(4939,3236);
+ctx.stroke();
+ctx.closePath();
+T(780,3286,10.0,"Right","600000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,2792);
+L(4939,2792);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,2792);
+M(4939,2792);
+ctx.stroke();
+ctx.closePath();
+T(780,2842,10.0,"Right","1200000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,2348);
+L(4939,2348);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,2348);
+M(4939,2348);
+ctx.stroke();
+ctx.closePath();
+T(780,2398,10.0,"Right","1800000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,1904);
+L(4939,1904);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,1904);
+M(4939,1904);
+ctx.stroke();
+ctx.closePath();
+T(780,1954,10.0,"Right","2400000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,1460);
+L(4939,1460);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,1460);
+M(4939,1460);
+ctx.stroke();
+ctx.closePath();
+T(780,1510,10.0,"Right","3000000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,1016);
+L(4939,1016);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,1016);
+M(4939,1016);
+ctx.stroke();
+ctx.closePath();
+T(780,1066,10.0,"Right","3600000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,572);
+L(4939,572);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,572);
+M(4939,572);
+ctx.stroke();
+ctx.closePath();
+T(780,622,10.0,"Right","4200000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,161);
+L(4939,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,161);
+M(4939,161);
+ctx.stroke();
+ctx.closePath();
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(860,3680);
+L(860,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(860,3680);
+M(860,161);
+ctx.stroke();
+ctx.closePath();
+T(860,3830,10.0,"Center","0");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(1268,3680);
+L(1268,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(1268,3680);
+M(1268,161);
+ctx.stroke();
+ctx.closePath();
+T(1268,3830,10.0,"Center","500000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(1676,3680);
+L(1676,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(1676,3680);
+M(1676,161);
+ctx.stroke();
+ctx.closePath();
+T(1676,3830,10.0,"Center","1000000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(2084,3680);
+L(2084,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(2084,3680);
+M(2084,161);
+ctx.stroke();
+ctx.closePath();
+T(2084,3830,10.0,"Center","1500000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(2492,3680);
+L(2492,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(2492,3680);
+M(2492,161);
+ctx.stroke();
+ctx.closePath();
+T(2492,3830,10.0,"Center","2000000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(2899,3680);
+L(2899,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(2899,3680);
+M(2899,161);
+ctx.stroke();
+ctx.closePath();
+T(2899,3830,10.0,"Center","2500000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(3307,3680);
+L(3307,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(3307,3680);
+M(3307,161);
+ctx.stroke();
+ctx.closePath();
+T(3307,3830,10.0,"Center","3000000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(3715,3680);
+L(3715,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(3715,3680);
+M(3715,161);
+ctx.stroke();
+ctx.closePath();
+T(3715,3830,10.0,"Center","3500000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(4123,3680);
+L(4123,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(4123,3680);
+M(4123,161);
+ctx.stroke();
+ctx.closePath();
+T(4123,3830,10.0,"Center","4000000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(4531,3680);
+L(4531,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(4531,3680);
+M(4531,161);
+ctx.stroke();
+ctx.closePath();
+T(4531,3830,10.0,"Center","4500000");
+if (gnuplot.grid_lines) {
+var saveWidth = ctx.lineWidth;
+ctx.lineWidth = ctx.lineWidth * 0.5;
+ctx.lineWidth = 0.5;
+ctx.strokeStyle = "rgb(160,160,160)";
+ctx.beginPath();
+M(4939,3680);
+L(4939,161);
+ctx.stroke();
+ctx.closePath();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.lineWidth = saveWidth;
+} // grid_lines
+ctx.beginPath();
+M(4939,3680);
+M(4939,161);
+ctx.stroke();
+ctx.closePath();
+T(4939,3830,10.0,"Center","5000000");
+TR(90,1971,270,10.0,"Center","Assembly");
+T(2899,3980,10.0,"Center","Reference");
+if (typeof(gnuplot.hide_gp_plot_1) == "undefined"|| !gnuplot.hide_gp_plot_1) {
+ctx.lineWidth = 3;
+ctx.strokeStyle = "rgb(255,000,000)";
+ctx.strokeStyle = "rgb(000,000,000)";
+T(5339,3543,10.0,"Right","FWD");
+ctx.strokeStyle = "rgb(255,000,000)";
+ctx.beginPath();
+M(5419,3493);
+L(5839,3493);
+M(1460,3165);
+M(1910,2741);
+M(3932,939);
+M(1459,939);
+L(1460,939);
+M(3933,3164);
+L(3934,3164);
+M(4389,553);
+M(1166,3423);
+M(3932,1042);
+M(2110,3162);
+L(2111,3162);
+M(4200,716);
+M(3814,3166);
+L(3815,3165);
+M(3931,3166);
+L(3931,3165);
+M(1910,2741);
+M(3929,3167);
+L(3929,3166);
+M(1460,1042);
+M(3933,1042);
+L(3934,1042);
+M(4200,716);
+M(1462,2589);
+M(1456,941);
+L(1456,940);
+M(3813,3166);
+L(3814,3166);
+M(3930,3166);
+M(1137,3447);
+M(1357,3680);
+M(874,3253);
+M(1356,310);
+M(873,3253);
+M(2110,3162);
+M(3817,3162);
+M(4200,716);
+M(2059,3495);
+M(2193,2514);
+L(2194,2513);
+M(1462,3162);
+M(3815,939);
+L(3816,939);
+M(3815,3164);
+L(3816,3164);
+M(3818,3162);
+M(3816,940);
+L(3817,940);
+M(3933,1041);
+M(1322,3109);
+M(1462,2589);
+M(2110,3162);
+M(3813,941);
+M(2727,1021);
+M(3839,2019);
+M(1896,2753);
+M(3813,3167);
+L(3813,3166);
+M(1455,1043);
+M(1456,1043);
+L(1457,1042);
+M(2912,3680);
+M(873,1852);
+M(2911,310);
+M(874,1851);
+M(1356,1852);
+M(2912,3253);
+M(2911,3253);
+M(1357,1851);
+M(4389,553);
+M(1166,3423);
+M(1055,2589);
+M(3932,3164);
+M(2110,3518);
+L(2111,3517);
+M(1460,940);
+M(4248,673);
+L(4248,672);
+M(2056,2635);
+L(2057,2635);
+M(3851,2561);
+M(2141,1011);
+M(3817,3162);
+M(2528,2183);
+M(2542,2196);
+M(3815,940);
+L(3816,940);
+M(1462,1041);
+M(2110,1041);
+L(2111,1041);
+M(4443,504);
+M(1515,1445);
+M(3366,3115);
+M(4389,553);
+M(1330,2180);
+M(1422,2180);
+M(3606,2180);
+L(3607,2180);
+M(3840,2180);
+M(1615,2881);
+M(1755,3006);
+M(1458,940);
+M(3932,3165);
+M(3929,1043);
+M(1457,3165);
+L(1458,3164);
+M(3931,3165);
+L(3932,3164);
+M(3653,1696);
+M(4293,3527);
+M(2728,2155);
+M(1083,3276);
+L(1084,3276);
+M(2575,3276);
+M(2575,3195);
+M(1083,2155);
+L(1084,2155);
+M(1329,2155);
+M(1421,2155);
+M(3839,2155);
+M(1083,1021);
+L(1084,1021);
+M(2575,1021);
+M(1088,1932);
+M(2728,2245);
+M(3606,2155);
+M(1329,3493);
+M(2575,3493);
+M(3606,3493);
+M(3839,3493);
+M(3459,3419);
+L(3459,3418);
+M(3460,3418);
+M(1083,3195);
+L(1084,3195);
+M(1171,1358);
+M(2576,2019);
+L(2576,2018);
+M(3840,3195);
+M(2576,2732);
+M(2728,2732);
+M(1083,1226);
+L(1084,1226);
+M(1172,1358);
+L(1172,1357);
+M(1421,3493);
+M(1497,1847);
+L(1498,1847);
+M(2058,2875);
+M(2575,1226);
+M(1422,1021);
+M(1896,2753);
+M(1097,1674);
+M(3112,3482);
+M(1717,524);
+M(1083,2180);
+L(1084,2180);
+M(2575,2180);
+M(2727,2180);
+M(2546,2245);
+M(1329,2180);
+M(1421,2180);
+M(3606,2180);
+M(3839,2180);
+M(1083,2245);
+L(1084,2245);
+M(1329,2245);
+M(1421,2245);
+M(3606,2245);
+M(3839,2245);
+M(3783,2915);
+L(3784,2915);
+M(4075,756);
+L(4076,756);
+M(3818,2589);
+M(2021,3274);
+M(1332,3274);
+L(1333,3274);
+M(1347,1445);
+M(1347,3115);
+M(1515,3262);
+L(1515,3261);
+M(3366,3262);
+L(3366,3261);
+M(1755,2881);
+M(1084,2180);
+M(2575,2180);
+L(2576,2180);
+M(2728,2180);
+M(1333,3274);
+L(1333,3273);
+M(876,3490);
+M(1070,3490);
+L(1071,3490);
+M(2474,3490);
+M(3815,3165);
+L(3815,3164);
+M(3656,1696);
+L(3656,1695);
+M(1042,637);
+L(1044,636);
+M(1088,3678);
+L(1088,3677);
+M(1098,3678);
+L(1098,3677);
+M(1458,3165);
+L(1459,3164);
+M(2912,1851);
+L(2917,1847);
+M(4261,3527);
+L(4263,3525);
+M(1755,2881);
+M(4365,575);
+M(4076,637);
+L(4077,636);
+M(2194,2498);
+L(2195,2497);
+M(1455,1043);
+L(1456,1043);
+M(4295,3527);
+L(4297,3525);
+M(1457,3166);
+L(1457,3165);
+M(4077,3527);
+L(4080,3525);
+M(4154,3527);
+L(4156,3525);
+M(1044,3527);
+L(1047,3525);
+M(3851,2561);
+L(3852,2560);
+M(3930,1043);
+L(3931,1042);
+M(4152,637);
+L(4153,636);
+M(3691,1153);
+L(3692,1153);
+M(2141,2561);
+L(2142,2560);
+M(2031,2658);
+L(2056,2635);
+M(4259,637);
+L(4260,636);
+M(4365,575);
+L(4389,553);
+M(1921,2732);
+L(1939,2715);
+M(1910,2741);
+L(1920,2732);
+M(3265,1536);
+L(3304,1499);
+M(2207,2486);
+L(2221,2474);
+M(1463,3162);
+L(1497,3131);
+M(1498,3131);
+L(1519,3112);
+M(3088,1695);
+L(3112,1674);
+M(2631,2106);
+L(2679,2063);
+M(2475,2245);
+L(2535,2190);
+M(3692,1153);
+L(3783,1069);
+M(2110,2589);
+L(2141,2561);
+M(1290,3311);
+L(1322,3281);
+M(1717,2915);
+L(1753,2882);
+M(4156,756);
+L(4200,716);
+M(2823,1932);
+L(2911,1852);
+M(1940,2715);
+L(1987,2672);
+M(3159,1631);
+L(3265,1535);
+M(4305,629);
+L(4365,575);
+M(1607,3014);
+L(1717,2915);
+M(2917,1847);
+L(3084,1696);
+M(3932,940);
+L(3933,939);
+M(1171,426);
+M(3459,426);
+M(3783,524);
+L(3784,524);
+M(4422,524);
+L(4443,504);
+L(4530,426);
+M(4533,424);
+L(4534,423);
+M(4249,672);
+L(4251,671);
+M(873,1852);
+L(874,1851);
+M(1356,1852);
+L(1357,1851);
+M(2911,1852);
+L(2912,1851);
+M(1920,1403);
+M(1999,1403);
+M(2059,1499);
+M(2549,1499);
+M(3305,1499);
+L(3376,1435);
+M(3377,1435);
+L(3395,1419);
+M(3396,1419);
+L(3414,1403);
+M(1180,3411);
+L(1181,3410);
+M(1753,3411);
+L(1754,3410);
+M(3783,848);
+M(3933,939);
+L(4034,848);
+M(1920,2659);
+L(1921,2658);
+M(1999,2659);
+L(2000,2658);
+M(3414,2659);
+L(3415,2658);
+M(876,1932);
+M(1070,1932);
+M(1084,2019);
+L(1084,2018);
+M(1330,2019);
+L(1330,2018);
+M(1422,2019);
+L(1422,2018);
+M(2474,1932);
+M(2728,2019);
+L(2740,2008);
+L(2823,1932);
+M(3607,2019);
+L(3607,2018);
+M(3840,2019);
+L(3840,2018);
+M(1519,3094);
+L(1607,3014);
+M(4200,716);
+L(4248,673);
+M(4263,756);
+M(2109,2590);
+L(2110,2589);
+M(4263,2590);
+M(1289,3312);
+L(1290,3311);
+M(2107,3312);
+L(2107,3311);
+M(877,1932);
+M(1071,1932);
+M(1088,1932);
+M(1098,1932);
+M(2475,1932);
+M(4250,671);
+L(4251,671);
+M(1047,821);
+M(1053,821);
+M(4080,821);
+L(4152,756);
+M(4259,756);
+M(4263,821);
+M(4297,821);
+M(1459,3165);
+M(1084,2245);
+M(1330,2245);
+M(1422,2245);
+M(2535,2190);
+L(2546,2180);
+M(2576,2245);
+M(3607,2245);
+M(3840,2245);
+M(2229,2466);
+L(2353,2354);
+L(2474,2245);
+M(2575,2245);
+M(2727,2245);
+M(3813,1043);
+M(3929,1043);
+L(3930,1043);
+M(1172,3418);
+M(2207,3418);
+M(3460,3418);
+M(4530,3418);
+L(4531,3418);
+M(1329,3195);
+M(1357,3253);
+L(1421,3195);
+M(2727,3195);
+M(3606,3195);
+M(3839,3195);
+M(3813,941);
+L(3814,940);
+M(3930,941);
+L(3930,940);
+M(1456,3166);
+M(1084,2155);
+M(1117,2106);
+M(1322,2106);
+M(1330,2155);
+M(1422,2155);
+M(2576,2155);
+L(2630,2106);
+M(3607,2155);
+M(3840,2155);
+M(3852,1011);
+L(3904,964);
+M(2142,2560);
+L(2193,2514);
+M(3814,1043);
+L(3814,1042);
+M(4537,420);
+L(4587,374);
+M(1083,2019);
+L(1084,2019);
+M(1329,2019);
+M(1421,2019);
+M(2575,2019);
+M(2679,2063);
+L(2727,2019);
+M(3606,2019);
+M(1082,2634);
+M(1088,2634);
+L(1089,2634);
+M(2060,2634);
+L(2107,2591);
+M(1118,2106);
+L(1118,2105);
+M(1323,2106);
+L(1323,2105);
+M(4250,2672);
+L(4251,2672);
+M(860,321);
+L(873,310);
+M(4263,327);
+M(4618,347);
+L(4639,328);
+M(4640,327);
+L(4647,321);
+M(1097,1674);
+M(2058,1499);
+M(2548,1499);
+M(3112,1674);
+L(3159,1631);
+M(3264,1535);
+L(3265,1535);
+M(4248,673);
+L(4249,672);
+M(1118,3464);
+L(1137,3447);
+L(1157,3429);
+M(1323,3464);
+M(2631,3464);
+M(3086,1696);
+L(3087,1695);
+M(3656,1695);
+M(3428,1386);
+L(3459,1358);
+M(4263,1386);
+M(4530,1358);
+M(1462,3162);
+M(2917,3131);
+M(1180,2882);
+M(3784,2915);
+L(3784,2914);
+M(1498,3131);
+M(2917,3131);
+M(3088,1184);
+M(3657,1184);
+L(3691,1153);
+M(1047,3519);
+M(1047,3525);
+L(1070,3504);
+M(1071,3504);
+L(1081,3495);
+M(4080,3519);
+M(4080,3525);
+M(1117,3281);
+M(2630,3281);
+M(3620,1213);
+L(3621,1212);
+M(3622,1212);
+L(3653,1184);
+M(1084,3195);
+M(1330,3195);
+M(1422,3195);
+L(1428,3189);
+M(1429,3189);
+L(1446,3173);
+M(1429,3189);
+M(1448,3173);
+L(1455,3166);
+M(2576,3195);
+M(2728,3195);
+M(3607,3195);
+M(1497,1847);
+M(1498,1847);
+M(3653,1696);
+M(4588,374);
+L(4618,347);
+M(1717,848);
+M(3784,848);
+M(4047,848);
+L(4075,821);
+M(4152,822);
+L(4152,821);
+M(4259,822);
+L(4259,821);
+M(1717,1069);
+M(3784,1069);
+L(3813,1043);
+M(1921,2658);
+M(2000,2658);
+M(2057,2635);
+L(2058,2634);
+M(2548,2634);
+M(3304,2634);
+M(3414,2658);
+L(3415,2658);
+M(2059,2179);
+M(2549,2179);
+L(2575,2155);
+M(2727,2155);
+M(3305,2179);
+L(3306,2179);
+M(3904,964);
+L(3929,941);
+M(1042,638);
+L(1042,637);
+M(4268,660);
+L(4293,637);
+M(3657,1695);
+M(1329,1021);
+M(1421,1021);
+M(3606,1021);
+M(3818,1041);
+L(3839,1021);
+M(877,3678);
+L(1042,3527);
+M(1071,3678);
+L(1071,3677);
+M(2475,3678);
+L(2475,3677);
+M(1335,3273);
+L(1356,3253);
+M(877,3482);
+M(1071,3482);
+M(1088,3482);
+M(1098,3482);
+L(1117,3464);
+M(1322,3464);
+M(2475,3482);
+M(2630,3464);
+M(1084,2732);
+M(1330,2732);
+M(1422,2732);
+M(3607,2732);
+M(3840,2732);
+M(1920,2659);
+M(1987,2672);
+L(1991,2668);
+M(1993,2665);
+L(1999,2659);
+M(3414,2659);
+M(4251,2672);
+M(4263,2672);
+M(1172,2486);
+M(3460,2486);
+M(4531,2486);
+M(1921,1403);
+M(2000,1403);
+M(3414,1403);
+L(3427,1391);
+M(1084,1226);
+M(1330,1226);
+M(1422,1226);
+M(2576,1226);
+M(2728,1226);
+M(3607,1226);
+L(3620,1213);
+M(3840,1226);
+M(1159,3429);
+L(1166,3423);
+L(1171,3418);
+M(4530,3419);
+L(4530,3418);
+M(1172,2486);
+M(2195,2497);
+L(2207,2486);
+M(3460,2486);
+M(4530,2486);
+M(1083,2732);
+L(1084,2732);
+M(1329,2732);
+M(1421,2732);
+M(1762,2874);
+L(1845,2799);
+M(1847,2797);
+L(1895,2753);
+M(1896,2753);
+L(1910,2741);
+M(2058,2875);
+L(2059,2874);
+M(2548,2875);
+L(2549,2874);
+M(2575,2732);
+M(2727,2732);
+M(3305,2875);
+L(3306,2874);
+M(3606,2732);
+M(3839,2732);
+M(1084,1021);
+M(1330,1021);
+M(2576,1021);
+M(2728,1021);
+M(3607,1021);
+M(3840,1021);
+L(3851,1011);
+M(1082,3490);
+M(1088,3490);
+L(1097,3482);
+M(2060,3490);
+M(1181,2882);
+M(1754,2882);
+L(1755,2881);
+L(1762,2875);
+M(2548,2875);
+M(3304,2875);
+M(4075,664);
+M(4152,664);
+M(4251,671);
+L(4259,664);
+M(1172,3418);
+L(1180,3411);
+M(1753,3411);
+M(2207,3418);
+M(4531,3418);
+M(2221,2474);
+L(2228,2468);
+M(1118,3281);
+M(1323,3281);
+L(1329,3276);
+M(1421,3276);
+M(2631,3281);
+M(2727,3276);
+M(3606,3276);
+M(3839,3276);
+M(1497,1847);
+M(2917,1847);
+M(4156,664);
+L(4157,663);
+M(4263,664);
+L(4267,660);
+M(1329,1226);
+M(1421,1226);
+M(2207,1358);
+L(2207,1357);
+M(2727,1226);
+M(3460,1358);
+L(3606,1226);
+M(3839,1226);
+M(4531,1358);
+L(4531,1357);
+M(1084,3493);
+L(1088,3490);
+M(1097,3490);
+M(1330,3493);
+M(1422,3493);
+M(2576,3493);
+M(2728,3493);
+M(3607,3493);
+M(3840,3493);
+M(4534,423);
+L(4537,420);
+M(874,3680);
+L(876,3678);
+M(1070,3678);
+M(2474,3678);
+M(3904,170);
+M(1172,426);
+M(2207,426);
+M(3460,426);
+M(4531,426);
+L(4533,424);
+M(1084,3276);
+M(1330,3276);
+L(1332,3274);
+M(1422,3276);
+M(2576,3276);
+M(2728,3276);
+M(3607,3276);
+M(3840,3276);
+M(1459,3164);
+L(1462,3162);
+M(1047,636);
+M(3783,524);
+M(4080,636);
+M(4263,636);
+M(4297,636);
+L(4305,629);
+M(4389,553);
+L(4400,544);
+L(4422,524);
+M(1082,3495);
+L(1084,3493);
+M(1088,3495);
+L(1089,3495);
+M(2060,3495);
+M(2727,3493);
+M(2228,2468);
+L(2229,2466);
+M(3815,1042);
+L(3817,1041);
+M(2058,2179);
+M(2546,2180);
+L(2548,2179);
+M(3304,2179);
+M(2107,2591);
+L(2109,2590);
+M(4293,637);
+L(4294,636);
+M(1181,3410);
+L(1289,3312);
+M(1754,3410);
+ctx.stroke();
+ctx.closePath();
+ctx.fillStyle = "rgb(255,000,000)";
+Pt(6,1460,3165,30.0);
+Pt(6,1460,3165,30.0);
+Pt(6,1910,2741,30.0);
+Pt(6,1910,2741,30.0);
+Pt(6,3932,939,30.0);
+Pt(6,3932,939,30.0);
+Pt(6,1459,939,30.0);
+Pt(6,1460,939,30.0);
+Pt(6,3933,3164,30.0);
+Pt(6,3934,3164,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,1166,3423,30.0);
+Pt(6,1166,3423,30.0);
+Pt(6,3932,1042,30.0);
+Pt(6,3932,1042,30.0);
+Pt(6,2110,3162,30.0);
+Pt(6,2111,3162,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,3814,3166,30.0);
+Pt(6,3815,3165,30.0);
+Pt(6,3931,3166,30.0);
+Pt(6,3931,3165,30.0);
+Pt(6,1910,2741,30.0);
+Pt(6,1910,2741,30.0);
+Pt(6,3929,3167,30.0);
+Pt(6,3929,3166,30.0);
+Pt(6,1460,1042,30.0);
+Pt(6,1460,1042,30.0);
+Pt(6,3933,1042,30.0);
+Pt(6,3934,1042,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,1462,2589,30.0);
+Pt(6,1462,2589,30.0);
+Pt(6,1456,941,30.0);
+Pt(6,1456,940,30.0);
+Pt(6,3813,3166,30.0);
+Pt(6,3814,3166,30.0);
+Pt(6,3930,3166,30.0);
+Pt(6,3930,3166,30.0);
+Pt(6,1137,3447,30.0);
+Pt(6,1137,3447,30.0);
+Pt(6,1357,3680,30.0);
+Pt(6,1357,3680,30.0);
+Pt(6,874,3253,30.0);
+Pt(6,874,3253,30.0);
+Pt(6,1356,310,30.0);
+Pt(6,1356,310,30.0);
+Pt(6,873,3253,30.0);
+Pt(6,873,3253,30.0);
+Pt(6,2110,3162,30.0);
+Pt(6,2110,3162,30.0);
+Pt(6,3817,3162,30.0);
+Pt(6,3817,3162,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,2059,3495,30.0);
+Pt(6,2059,3495,30.0);
+Pt(6,2193,2514,30.0);
+Pt(6,2194,2513,30.0);
+Pt(6,1462,3162,30.0);
+Pt(6,1462,3162,30.0);
+Pt(6,3815,939,30.0);
+Pt(6,3816,939,30.0);
+Pt(6,3815,3164,30.0);
+Pt(6,3816,3164,30.0);
+Pt(6,3818,3162,30.0);
+Pt(6,3818,3162,30.0);
+Pt(6,3816,940,30.0);
+Pt(6,3817,940,30.0);
+Pt(6,3933,1041,30.0);
+Pt(6,3933,1041,30.0);
+Pt(6,1322,3109,30.0);
+Pt(6,1322,3109,30.0);
+Pt(6,1462,2589,30.0);
+Pt(6,1462,2589,30.0);
+Pt(6,2110,3162,30.0);
+Pt(6,2110,3162,30.0);
+Pt(6,3813,941,30.0);
+Pt(6,3813,941,30.0);
+Pt(6,2727,1021,30.0);
+Pt(6,2727,1021,30.0);
+Pt(6,3839,2019,30.0);
+Pt(6,3839,2019,30.0);
+Pt(6,1896,2753,30.0);
+Pt(6,1896,2753,30.0);
+Pt(6,3813,3167,30.0);
+Pt(6,3813,3166,30.0);
+Pt(6,1455,1043,30.0);
+Pt(6,1455,1043,30.0);
+Pt(6,1456,1043,30.0);
+Pt(6,1457,1042,30.0);
+Pt(6,2912,3680,30.0);
+Pt(6,2912,3680,30.0);
+Pt(6,873,1852,30.0);
+Pt(6,873,1852,30.0);
+Pt(6,2911,310,30.0);
+Pt(6,2911,310,30.0);
+Pt(6,874,1851,30.0);
+Pt(6,874,1851,30.0);
+Pt(6,1356,1852,30.0);
+Pt(6,1356,1852,30.0);
+Pt(6,2912,3253,30.0);
+Pt(6,2912,3253,30.0);
+Pt(6,2911,3253,30.0);
+Pt(6,2911,3253,30.0);
+Pt(6,1357,1851,30.0);
+Pt(6,1357,1851,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,1166,3423,30.0);
+Pt(6,1166,3423,30.0);
+Pt(6,1055,2589,30.0);
+Pt(6,1055,2589,30.0);
+Pt(6,3932,3164,30.0);
+Pt(6,3932,3164,30.0);
+Pt(6,2110,3518,30.0);
+Pt(6,2111,3517,30.0);
+Pt(6,1460,940,30.0);
+Pt(6,1460,940,30.0);
+Pt(6,4248,673,30.0);
+Pt(6,4248,672,30.0);
+Pt(6,2056,2635,30.0);
+Pt(6,2057,2635,30.0);
+Pt(6,3851,2561,30.0);
+Pt(6,3851,2561,30.0);
+Pt(6,2141,1011,30.0);
+Pt(6,2141,1011,30.0);
+Pt(6,3817,3162,30.0);
+Pt(6,3817,3162,30.0);
+Pt(6,2528,2183,30.0);
+Pt(6,2528,2183,30.0);
+Pt(6,2542,2196,30.0);
+Pt(6,2542,2196,30.0);
+Pt(6,3815,940,30.0);
+Pt(6,3816,940,30.0);
+Pt(6,1462,1041,30.0);
+Pt(6,1462,1041,30.0);
+Pt(6,2110,1041,30.0);
+Pt(6,2111,1041,30.0);
+Pt(6,4443,504,30.0);
+Pt(6,4443,504,30.0);
+Pt(6,1515,1445,30.0);
+Pt(6,1515,1445,30.0);
+Pt(6,3366,3115,30.0);
+Pt(6,3366,3115,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,1330,2180,30.0);
+Pt(6,1330,2180,30.0);
+Pt(6,1422,2180,30.0);
+Pt(6,1422,2180,30.0);
+Pt(6,3606,2180,30.0);
+Pt(6,3607,2180,30.0);
+Pt(6,3840,2180,30.0);
+Pt(6,3840,2180,30.0);
+Pt(6,1615,2881,30.0);
+Pt(6,1615,2881,30.0);
+Pt(6,1755,3006,30.0);
+Pt(6,1755,3006,30.0);
+Pt(6,1458,940,30.0);
+Pt(6,1458,940,30.0);
+Pt(6,3932,3165,30.0);
+Pt(6,3932,3165,30.0);
+Pt(6,3929,1043,30.0);
+Pt(6,3929,1043,30.0);
+Pt(6,1457,3165,30.0);
+Pt(6,1458,3164,30.0);
+Pt(6,3931,3165,30.0);
+Pt(6,3932,3164,30.0);
+Pt(6,3653,1696,30.0);
+Pt(6,3653,1696,30.0);
+Pt(6,4293,3527,30.0);
+Pt(6,4293,3527,30.0);
+Pt(6,2728,2155,30.0);
+Pt(6,2728,2155,30.0);
+Pt(6,1083,3276,30.0);
+Pt(6,1084,3276,30.0);
+Pt(6,2575,3276,30.0);
+Pt(6,2575,3276,30.0);
+Pt(6,2575,3195,30.0);
+Pt(6,2575,3195,30.0);
+Pt(6,1083,2155,30.0);
+Pt(6,1084,2155,30.0);
+Pt(6,1329,2155,30.0);
+Pt(6,1329,2155,30.0);
+Pt(6,1421,2155,30.0);
+Pt(6,1421,2155,30.0);
+Pt(6,3839,2155,30.0);
+Pt(6,3839,2155,30.0);
+Pt(6,1083,1021,30.0);
+Pt(6,1084,1021,30.0);
+Pt(6,2575,1021,30.0);
+Pt(6,2575,1021,30.0);
+Pt(6,1088,1932,30.0);
+Pt(6,1088,1932,30.0);
+Pt(6,2728,2245,30.0);
+Pt(6,2728,2245,30.0);
+Pt(6,3606,2155,30.0);
+Pt(6,3606,2155,30.0);
+Pt(6,1329,3493,30.0);
+Pt(6,1329,3493,30.0);
+Pt(6,2575,3493,30.0);
+Pt(6,2575,3493,30.0);
+Pt(6,3606,3493,30.0);
+Pt(6,3606,3493,30.0);
+Pt(6,3839,3493,30.0);
+Pt(6,3839,3493,30.0);
+Pt(6,3459,3419,30.0);
+Pt(6,3459,3418,30.0);
+Pt(6,3460,3418,30.0);
+Pt(6,3460,3418,30.0);
+Pt(6,1083,3195,30.0);
+Pt(6,1084,3195,30.0);
+Pt(6,1171,1358,30.0);
+Pt(6,1171,1358,30.0);
+Pt(6,2576,2019,30.0);
+Pt(6,2576,2018,30.0);
+Pt(6,3840,3195,30.0);
+Pt(6,3840,3195,30.0);
+Pt(6,2576,2732,30.0);
+Pt(6,2576,2732,30.0);
+Pt(6,2728,2732,30.0);
+Pt(6,2728,2732,30.0);
+Pt(6,1083,1226,30.0);
+Pt(6,1084,1226,30.0);
+Pt(6,1172,1358,30.0);
+Pt(6,1172,1357,30.0);
+Pt(6,1421,3493,30.0);
+Pt(6,1421,3493,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1498,1847,30.0);
+Pt(6,2058,2875,30.0);
+Pt(6,2058,2875,30.0);
+Pt(6,2575,1226,30.0);
+Pt(6,2575,1226,30.0);
+Pt(6,1422,1021,30.0);
+Pt(6,1422,1021,30.0);
+Pt(6,1896,2753,30.0);
+Pt(6,1896,2753,30.0);
+Pt(6,1896,2753,30.0);
+Pt(6,1896,2753,30.0);
+Pt(6,1097,1674,30.0);
+Pt(6,1097,1674,30.0);
+Pt(6,3112,3482,30.0);
+Pt(6,3112,3482,30.0);
+Pt(6,1717,524,30.0);
+Pt(6,1717,524,30.0);
+Pt(6,1083,2180,30.0);
+Pt(6,1084,2180,30.0);
+Pt(6,2575,2180,30.0);
+Pt(6,2575,2180,30.0);
+Pt(6,2727,2180,30.0);
+Pt(6,2727,2180,30.0);
+Pt(6,2546,2245,30.0);
+Pt(6,2546,2245,30.0);
+Pt(6,1329,2180,30.0);
+Pt(6,1329,2180,30.0);
+Pt(6,1421,2180,30.0);
+Pt(6,1421,2180,30.0);
+Pt(6,3606,2180,30.0);
+Pt(6,3606,2180,30.0);
+Pt(6,3839,2180,30.0);
+Pt(6,3839,2180,30.0);
+Pt(6,1083,2245,30.0);
+Pt(6,1084,2245,30.0);
+Pt(6,1329,2245,30.0);
+Pt(6,1329,2245,30.0);
+Pt(6,1421,2245,30.0);
+Pt(6,1421,2245,30.0);
+Pt(6,3606,2245,30.0);
+Pt(6,3606,2245,30.0);
+Pt(6,3839,2245,30.0);
+Pt(6,3839,2245,30.0);
+Pt(6,3783,2915,30.0);
+Pt(6,3784,2915,30.0);
+Pt(6,4075,756,30.0);
+Pt(6,4076,756,30.0);
+Pt(6,3818,2589,30.0);
+Pt(6,3818,2589,30.0);
+Pt(6,2021,3274,30.0);
+Pt(6,2021,3274,30.0);
+Pt(6,1332,3274,30.0);
+Pt(6,1333,3274,30.0);
+Pt(6,1347,1445,30.0);
+Pt(6,1347,1445,30.0);
+Pt(6,1347,3115,30.0);
+Pt(6,1347,3115,30.0);
+Pt(6,1515,3262,30.0);
+Pt(6,1515,3261,30.0);
+Pt(6,3366,3262,30.0);
+Pt(6,3366,3261,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,1084,2180,30.0);
+Pt(6,1084,2180,30.0);
+Pt(6,2575,2180,30.0);
+Pt(6,2576,2180,30.0);
+Pt(6,2728,2180,30.0);
+Pt(6,2728,2180,30.0);
+Pt(6,1333,3274,30.0);
+Pt(6,1333,3273,30.0);
+Pt(6,876,3490,30.0);
+Pt(6,876,3490,30.0);
+Pt(6,1070,3490,30.0);
+Pt(6,1071,3490,30.0);
+Pt(6,2474,3490,30.0);
+Pt(6,2474,3490,30.0);
+Pt(6,3815,3165,30.0);
+Pt(6,3815,3164,30.0);
+Pt(6,3656,1696,30.0);
+Pt(6,3656,1695,30.0);
+Pt(6,1042,637,30.0);
+Pt(6,1044,636,30.0);
+Pt(6,1088,3678,30.0);
+Pt(6,1088,3677,30.0);
+Pt(6,1098,3678,30.0);
+Pt(6,1098,3677,30.0);
+Pt(6,1458,3165,30.0);
+Pt(6,1459,3164,30.0);
+Pt(6,2912,1851,30.0);
+Pt(6,2917,1847,30.0);
+Pt(6,4261,3527,30.0);
+Pt(6,4263,3525,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,4365,575,30.0);
+Pt(6,4365,575,30.0);
+Pt(6,4076,637,30.0);
+Pt(6,4077,636,30.0);
+Pt(6,2194,2498,30.0);
+Pt(6,2195,2497,30.0);
+Pt(6,1455,1043,30.0);
+Pt(6,1456,1043,30.0);
+Pt(6,4295,3527,30.0);
+Pt(6,4297,3525,30.0);
+Pt(6,1457,3166,30.0);
+Pt(6,1457,3165,30.0);
+Pt(6,4077,3527,30.0);
+Pt(6,4080,3525,30.0);
+Pt(6,4154,3527,30.0);
+Pt(6,4156,3525,30.0);
+Pt(6,1044,3527,30.0);
+Pt(6,1047,3525,30.0);
+Pt(6,3851,2561,30.0);
+Pt(6,3852,2560,30.0);
+Pt(6,3930,1043,30.0);
+Pt(6,3931,1042,30.0);
+Pt(6,4152,637,30.0);
+Pt(6,4153,636,30.0);
+Pt(6,3691,1153,30.0);
+Pt(6,3692,1153,30.0);
+Pt(6,2141,2561,30.0);
+Pt(6,2142,2560,30.0);
+Pt(6,2031,2658,30.0);
+Pt(6,2056,2635,30.0);
+Pt(6,4259,637,30.0);
+Pt(6,4260,636,30.0);
+Pt(6,4365,575,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,1921,2732,30.0);
+Pt(6,1939,2715,30.0);
+Pt(6,1910,2741,30.0);
+Pt(6,1920,2732,30.0);
+Pt(6,3265,1536,30.0);
+Pt(6,3304,1499,30.0);
+Pt(6,2207,2486,30.0);
+Pt(6,2221,2474,30.0);
+Pt(6,1463,3162,30.0);
+Pt(6,1497,3131,30.0);
+Pt(6,1498,3131,30.0);
+Pt(6,1519,3112,30.0);
+Pt(6,3088,1695,30.0);
+Pt(6,3112,1674,30.0);
+Pt(6,2631,2106,30.0);
+Pt(6,2679,2063,30.0);
+Pt(6,2475,2245,30.0);
+Pt(6,2535,2190,30.0);
+Pt(6,3692,1153,30.0);
+Pt(6,3783,1069,30.0);
+Pt(6,2110,2589,30.0);
+Pt(6,2141,2561,30.0);
+Pt(6,1290,3311,30.0);
+Pt(6,1322,3281,30.0);
+Pt(6,1717,2915,30.0);
+Pt(6,1753,2882,30.0);
+Pt(6,4156,756,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,2823,1932,30.0);
+Pt(6,2911,1852,30.0);
+Pt(6,1940,2715,30.0);
+Pt(6,1987,2672,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3265,1535,30.0);
+Pt(6,4305,629,30.0);
+Pt(6,4365,575,30.0);
+Pt(6,1607,3014,30.0);
+Pt(6,1717,2915,30.0);
+Pt(6,2917,1847,30.0);
+Pt(6,3084,1696,30.0);
+Pt(6,3932,940,30.0);
+Pt(6,3933,939,30.0);
+Pt(6,1171,426,30.0);
+Pt(6,1171,426,30.0);
+Pt(6,3459,426,30.0);
+Pt(6,3459,426,30.0);
+Pt(6,3783,524,30.0);
+Pt(6,3784,524,30.0);
+Pt(6,4422,524,30.0);
+Pt(6,4443,504,30.0);
+Pt(6,4443,504,30.0);
+Pt(6,4443,504,30.0);
+Pt(6,4443,504,30.0);
+Pt(6,4530,426,30.0);
+Pt(6,4533,424,30.0);
+Pt(6,4534,423,30.0);
+Pt(6,4249,672,30.0);
+Pt(6,4251,671,30.0);
+Pt(6,873,1852,30.0);
+Pt(6,874,1851,30.0);
+Pt(6,1356,1852,30.0);
+Pt(6,1357,1851,30.0);
+Pt(6,2911,1852,30.0);
+Pt(6,2912,1851,30.0);
+Pt(6,1920,1403,30.0);
+Pt(6,1920,1403,30.0);
+Pt(6,1999,1403,30.0);
+Pt(6,1999,1403,30.0);
+Pt(6,2059,1499,30.0);
+Pt(6,2059,1499,30.0);
+Pt(6,2549,1499,30.0);
+Pt(6,2549,1499,30.0);
+Pt(6,3305,1499,30.0);
+Pt(6,3376,1435,30.0);
+Pt(6,3377,1435,30.0);
+Pt(6,3395,1419,30.0);
+Pt(6,3396,1419,30.0);
+Pt(6,3414,1403,30.0);
+Pt(6,1180,3411,30.0);
+Pt(6,1181,3410,30.0);
+Pt(6,1753,3411,30.0);
+Pt(6,1754,3410,30.0);
+Pt(6,3783,848,30.0);
+Pt(6,3783,848,30.0);
+Pt(6,3933,939,30.0);
+Pt(6,4034,848,30.0);
+Pt(6,1920,2659,30.0);
+Pt(6,1921,2658,30.0);
+Pt(6,1999,2659,30.0);
+Pt(6,2000,2658,30.0);
+Pt(6,3414,2659,30.0);
+Pt(6,3415,2658,30.0);
+Pt(6,876,1932,30.0);
+Pt(6,876,1932,30.0);
+Pt(6,1070,1932,30.0);
+Pt(6,1070,1932,30.0);
+Pt(6,1084,2019,30.0);
+Pt(6,1084,2018,30.0);
+Pt(6,1330,2019,30.0);
+Pt(6,1330,2018,30.0);
+Pt(6,1422,2019,30.0);
+Pt(6,1422,2018,30.0);
+Pt(6,2474,1932,30.0);
+Pt(6,2474,1932,30.0);
+Pt(6,2728,2019,30.0);
+Pt(6,2740,2008,30.0);
+Pt(6,2740,2008,30.0);
+Pt(6,2823,1932,30.0);
+Pt(6,3607,2019,30.0);
+Pt(6,3607,2018,30.0);
+Pt(6,3840,2019,30.0);
+Pt(6,3840,2018,30.0);
+Pt(6,1519,3094,30.0);
+Pt(6,1607,3014,30.0);
+Pt(6,4200,716,30.0);
+Pt(6,4248,673,30.0);
+Pt(6,4263,756,30.0);
+Pt(6,4263,756,30.0);
+Pt(6,2109,2590,30.0);
+Pt(6,2110,2589,30.0);
+Pt(6,4263,2590,30.0);
+Pt(6,4263,2590,30.0);
+Pt(6,1289,3312,30.0);
+Pt(6,1290,3311,30.0);
+Pt(6,2107,3312,30.0);
+Pt(6,2107,3311,30.0);
+Pt(6,877,1932,30.0);
+Pt(6,877,1932,30.0);
+Pt(6,1071,1932,30.0);
+Pt(6,1071,1932,30.0);
+Pt(6,1088,1932,30.0);
+Pt(6,1088,1932,30.0);
+Pt(6,1098,1932,30.0);
+Pt(6,1098,1932,30.0);
+Pt(6,2475,1932,30.0);
+Pt(6,2475,1932,30.0);
+Pt(6,4250,671,30.0);
+Pt(6,4251,671,30.0);
+Pt(6,1047,821,30.0);
+Pt(6,1047,821,30.0);
+Pt(6,1053,821,30.0);
+Pt(6,1053,821,30.0);
+Pt(6,4080,821,30.0);
+Pt(6,4152,756,30.0);
+Pt(6,4259,756,30.0);
+Pt(6,4259,756,30.0);
+Pt(6,4263,821,30.0);
+Pt(6,4263,821,30.0);
+Pt(6,4297,821,30.0);
+Pt(6,4297,821,30.0);
+Pt(6,1459,3165,30.0);
+Pt(6,1459,3165,30.0);
+Pt(6,1084,2245,30.0);
+Pt(6,1084,2245,30.0);
+Pt(6,1330,2245,30.0);
+Pt(6,1330,2245,30.0);
+Pt(6,1422,2245,30.0);
+Pt(6,1422,2245,30.0);
+Pt(6,2535,2190,30.0);
+Pt(6,2546,2180,30.0);
+Pt(6,2576,2245,30.0);
+Pt(6,2576,2245,30.0);
+Pt(6,3607,2245,30.0);
+Pt(6,3607,2245,30.0);
+Pt(6,3840,2245,30.0);
+Pt(6,3840,2245,30.0);
+Pt(6,2229,2466,30.0);
+Pt(6,2353,2354,30.0);
+Pt(6,2353,2354,30.0);
+Pt(6,2474,2245,30.0);
+Pt(6,2575,2245,30.0);
+Pt(6,2575,2245,30.0);
+Pt(6,2727,2245,30.0);
+Pt(6,2727,2245,30.0);
+Pt(6,3813,1043,30.0);
+Pt(6,3813,1043,30.0);
+Pt(6,3929,1043,30.0);
+Pt(6,3930,1043,30.0);
+Pt(6,1172,3418,30.0);
+Pt(6,1172,3418,30.0);
+Pt(6,2207,3418,30.0);
+Pt(6,2207,3418,30.0);
+Pt(6,3460,3418,30.0);
+Pt(6,3460,3418,30.0);
+Pt(6,4530,3418,30.0);
+Pt(6,4531,3418,30.0);
+Pt(6,1329,3195,30.0);
+Pt(6,1329,3195,30.0);
+Pt(6,1357,3253,30.0);
+Pt(6,1421,3195,30.0);
+Pt(6,2727,3195,30.0);
+Pt(6,2727,3195,30.0);
+Pt(6,3606,3195,30.0);
+Pt(6,3606,3195,30.0);
+Pt(6,3839,3195,30.0);
+Pt(6,3839,3195,30.0);
+Pt(6,3813,941,30.0);
+Pt(6,3814,940,30.0);
+Pt(6,3930,941,30.0);
+Pt(6,3930,940,30.0);
+Pt(6,1456,3166,30.0);
+Pt(6,1456,3166,30.0);
+Pt(6,1084,2155,30.0);
+Pt(6,1084,2155,30.0);
+Pt(6,1117,2106,30.0);
+Pt(6,1117,2106,30.0);
+Pt(6,1322,2106,30.0);
+Pt(6,1322,2106,30.0);
+Pt(6,1330,2155,30.0);
+Pt(6,1330,2155,30.0);
+Pt(6,1422,2155,30.0);
+Pt(6,1422,2155,30.0);
+Pt(6,2576,2155,30.0);
+Pt(6,2630,2106,30.0);
+Pt(6,3607,2155,30.0);
+Pt(6,3607,2155,30.0);
+Pt(6,3840,2155,30.0);
+Pt(6,3840,2155,30.0);
+Pt(6,3852,1011,30.0);
+Pt(6,3904,964,30.0);
+Pt(6,2142,2560,30.0);
+Pt(6,2193,2514,30.0);
+Pt(6,3814,1043,30.0);
+Pt(6,3814,1042,30.0);
+Pt(6,4537,420,30.0);
+Pt(6,4587,374,30.0);
+Pt(6,1083,2019,30.0);
+Pt(6,1084,2019,30.0);
+Pt(6,1329,2019,30.0);
+Pt(6,1329,2019,30.0);
+Pt(6,1421,2019,30.0);
+Pt(6,1421,2019,30.0);
+Pt(6,2575,2019,30.0);
+Pt(6,2575,2019,30.0);
+Pt(6,2679,2063,30.0);
+Pt(6,2727,2019,30.0);
+Pt(6,3606,2019,30.0);
+Pt(6,3606,2019,30.0);
+Pt(6,1082,2634,30.0);
+Pt(6,1082,2634,30.0);
+Pt(6,1088,2634,30.0);
+Pt(6,1089,2634,30.0);
+Pt(6,2060,2634,30.0);
+Pt(6,2107,2591,30.0);
+Pt(6,1118,2106,30.0);
+Pt(6,1118,2105,30.0);
+Pt(6,1323,2106,30.0);
+Pt(6,1323,2105,30.0);
+Pt(6,4250,2672,30.0);
+Pt(6,4251,2672,30.0);
+Pt(6,860,321,30.0);
+Pt(6,873,310,30.0);
+Pt(6,4263,327,30.0);
+Pt(6,4263,327,30.0);
+Pt(6,4618,347,30.0);
+Pt(6,4618,347,30.0);
+Pt(6,4618,347,30.0);
+Pt(6,4639,328,30.0);
+Pt(6,4640,327,30.0);
+Pt(6,4647,321,30.0);
+Pt(6,1097,1674,30.0);
+Pt(6,1097,1674,30.0);
+Pt(6,2058,1499,30.0);
+Pt(6,2058,1499,30.0);
+Pt(6,2548,1499,30.0);
+Pt(6,2548,1499,30.0);
+Pt(6,3112,1674,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3159,1631,30.0);
+Pt(6,3264,1535,30.0);
+Pt(6,3265,1535,30.0);
+Pt(6,4248,673,30.0);
+Pt(6,4249,672,30.0);
+Pt(6,1118,3464,30.0);
+Pt(6,1137,3447,30.0);
+Pt(6,1137,3447,30.0);
+Pt(6,1137,3447,30.0);
+Pt(6,1137,3447,30.0);
+Pt(6,1157,3429,30.0);
+Pt(6,1323,3464,30.0);
+Pt(6,1323,3464,30.0);
+Pt(6,2631,3464,30.0);
+Pt(6,2631,3464,30.0);
+Pt(6,3086,1696,30.0);
+Pt(6,3087,1695,30.0);
+Pt(6,3656,1695,30.0);
+Pt(6,3656,1695,30.0);
+Pt(6,3428,1386,30.0);
+Pt(6,3459,1358,30.0);
+Pt(6,4263,1386,30.0);
+Pt(6,4263,1386,30.0);
+Pt(6,4530,1358,30.0);
+Pt(6,4530,1358,30.0);
+Pt(6,1462,3162,30.0);
+Pt(6,1462,3162,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,1180,2882,30.0);
+Pt(6,1180,2882,30.0);
+Pt(6,3784,2915,30.0);
+Pt(6,3784,2914,30.0);
+Pt(6,1498,3131,30.0);
+Pt(6,1498,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,2917,3131,30.0);
+Pt(6,3088,1184,30.0);
+Pt(6,3088,1184,30.0);
+Pt(6,3657,1184,30.0);
+Pt(6,3691,1153,30.0);
+Pt(6,1047,3519,30.0);
+Pt(6,1047,3519,30.0);
+Pt(6,1047,3525,30.0);
+Pt(6,1070,3504,30.0);
+Pt(6,1071,3504,30.0);
+Pt(6,1081,3495,30.0);
+Pt(6,4080,3519,30.0);
+Pt(6,4080,3519,30.0);
+Pt(6,4080,3525,30.0);
+Pt(6,4080,3525,30.0);
+Pt(6,1117,3281,30.0);
+Pt(6,1117,3281,30.0);
+Pt(6,2630,3281,30.0);
+Pt(6,2630,3281,30.0);
+Pt(6,3620,1213,30.0);
+Pt(6,3621,1212,30.0);
+Pt(6,3622,1212,30.0);
+Pt(6,3653,1184,30.0);
+Pt(6,1084,3195,30.0);
+Pt(6,1084,3195,30.0);
+Pt(6,1330,3195,30.0);
+Pt(6,1330,3195,30.0);
+Pt(6,1422,3195,30.0);
+Pt(6,1428,3189,30.0);
+Pt(6,1428,3189,30.0);
+Pt(6,1428,3189,30.0);
+Pt(6,1428,3189,30.0);
+Pt(6,1428,3189,30.0);
+Pt(6,1429,3189,30.0);
+Pt(6,1446,3173,30.0);
+Pt(6,1429,3189,30.0);
+Pt(6,1429,3189,30.0);
+Pt(6,1448,3173,30.0);
+Pt(6,1455,3166,30.0);
+Pt(6,2576,3195,30.0);
+Pt(6,2576,3195,30.0);
+Pt(6,2728,3195,30.0);
+Pt(6,2728,3195,30.0);
+Pt(6,3607,3195,30.0);
+Pt(6,3607,3195,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1498,1847,30.0);
+Pt(6,1498,1847,30.0);
+Pt(6,3653,1696,30.0);
+Pt(6,3653,1696,30.0);
+Pt(6,4588,374,30.0);
+Pt(6,4618,347,30.0);
+Pt(6,4618,347,30.0);
+Pt(6,4618,347,30.0);
+Pt(6,1717,848,30.0);
+Pt(6,1717,848,30.0);
+Pt(6,3784,848,30.0);
+Pt(6,3784,848,30.0);
+Pt(6,4047,848,30.0);
+Pt(6,4075,821,30.0);
+Pt(6,4152,822,30.0);
+Pt(6,4152,821,30.0);
+Pt(6,4259,822,30.0);
+Pt(6,4259,821,30.0);
+Pt(6,1717,1069,30.0);
+Pt(6,1717,1069,30.0);
+Pt(6,3784,1069,30.0);
+Pt(6,3813,1043,30.0);
+Pt(6,1921,2658,30.0);
+Pt(6,1921,2658,30.0);
+Pt(6,2000,2658,30.0);
+Pt(6,2000,2658,30.0);
+Pt(6,2057,2635,30.0);
+Pt(6,2058,2634,30.0);
+Pt(6,2548,2634,30.0);
+Pt(6,2548,2634,30.0);
+Pt(6,3304,2634,30.0);
+Pt(6,3304,2634,30.0);
+Pt(6,3414,2658,30.0);
+Pt(6,3415,2658,30.0);
+Pt(6,2059,2179,30.0);
+Pt(6,2059,2179,30.0);
+Pt(6,2549,2179,30.0);
+Pt(6,2575,2155,30.0);
+Pt(6,2727,2155,30.0);
+Pt(6,2727,2155,30.0);
+Pt(6,3305,2179,30.0);
+Pt(6,3306,2179,30.0);
+Pt(6,3904,964,30.0);
+Pt(6,3929,941,30.0);
+Pt(6,1042,638,30.0);
+Pt(6,1042,637,30.0);
+Pt(6,4268,660,30.0);
+Pt(6,4293,637,30.0);
+Pt(6,3657,1695,30.0);
+Pt(6,3657,1695,30.0);
+Pt(6,1329,1021,30.0);
+Pt(6,1329,1021,30.0);
+Pt(6,1421,1021,30.0);
+Pt(6,1421,1021,30.0);
+Pt(6,3606,1021,30.0);
+Pt(6,3606,1021,30.0);
+Pt(6,3818,1041,30.0);
+Pt(6,3839,1021,30.0);
+Pt(6,877,3678,30.0);
+Pt(6,1042,3527,30.0);
+Pt(6,1071,3678,30.0);
+Pt(6,1071,3677,30.0);
+Pt(6,2475,3678,30.0);
+Pt(6,2475,3677,30.0);
+Pt(6,1335,3273,30.0);
+Pt(6,1356,3253,30.0);
+Pt(6,877,3482,30.0);
+Pt(6,877,3482,30.0);
+Pt(6,1071,3482,30.0);
+Pt(6,1071,3482,30.0);
+Pt(6,1088,3482,30.0);
+Pt(6,1088,3482,30.0);
+Pt(6,1098,3482,30.0);
+Pt(6,1117,3464,30.0);
+Pt(6,1322,3464,30.0);
+Pt(6,1322,3464,30.0);
+Pt(6,2475,3482,30.0);
+Pt(6,2475,3482,30.0);
+Pt(6,2630,3464,30.0);
+Pt(6,2630,3464,30.0);
+Pt(6,1084,2732,30.0);
+Pt(6,1084,2732,30.0);
+Pt(6,1330,2732,30.0);
+Pt(6,1330,2732,30.0);
+Pt(6,1422,2732,30.0);
+Pt(6,1422,2732,30.0);
+Pt(6,3607,2732,30.0);
+Pt(6,3607,2732,30.0);
+Pt(6,3840,2732,30.0);
+Pt(6,3840,2732,30.0);
+Pt(6,1920,2659,30.0);
+Pt(6,1920,2659,30.0);
+Pt(6,1987,2672,30.0);
+Pt(6,1991,2668,30.0);
+Pt(6,1993,2665,30.0);
+Pt(6,1999,2659,30.0);
+Pt(6,3414,2659,30.0);
+Pt(6,3414,2659,30.0);
+Pt(6,4251,2672,30.0);
+Pt(6,4251,2672,30.0);
+Pt(6,4263,2672,30.0);
+Pt(6,4263,2672,30.0);
+Pt(6,1172,2486,30.0);
+Pt(6,1172,2486,30.0);
+Pt(6,3460,2486,30.0);
+Pt(6,3460,2486,30.0);
+Pt(6,4531,2486,30.0);
+Pt(6,4531,2486,30.0);
+Pt(6,1921,1403,30.0);
+Pt(6,1921,1403,30.0);
+Pt(6,2000,1403,30.0);
+Pt(6,2000,1403,30.0);
+Pt(6,3414,1403,30.0);
+Pt(6,3427,1391,30.0);
+Pt(6,1084,1226,30.0);
+Pt(6,1084,1226,30.0);
+Pt(6,1330,1226,30.0);
+Pt(6,1330,1226,30.0);
+Pt(6,1422,1226,30.0);
+Pt(6,1422,1226,30.0);
+Pt(6,2576,1226,30.0);
+Pt(6,2576,1226,30.0);
+Pt(6,2728,1226,30.0);
+Pt(6,2728,1226,30.0);
+Pt(6,3607,1226,30.0);
+Pt(6,3620,1213,30.0);
+Pt(6,3840,1226,30.0);
+Pt(6,3840,1226,30.0);
+Pt(6,1159,3429,30.0);
+Pt(6,1166,3423,30.0);
+Pt(6,1166,3423,30.0);
+Pt(6,1171,3418,30.0);
+Pt(6,4530,3419,30.0);
+Pt(6,4530,3418,30.0);
+Pt(6,1172,2486,30.0);
+Pt(6,1172,2486,30.0);
+Pt(6,2195,2497,30.0);
+Pt(6,2207,2486,30.0);
+Pt(6,3460,2486,30.0);
+Pt(6,3460,2486,30.0);
+Pt(6,4530,2486,30.0);
+Pt(6,4530,2486,30.0);
+Pt(6,1083,2732,30.0);
+Pt(6,1084,2732,30.0);
+Pt(6,1329,2732,30.0);
+Pt(6,1329,2732,30.0);
+Pt(6,1421,2732,30.0);
+Pt(6,1421,2732,30.0);
+Pt(6,1762,2874,30.0);
+Pt(6,1845,2799,30.0);
+Pt(6,1847,2797,30.0);
+Pt(6,1895,2753,30.0);
+Pt(6,1896,2753,30.0);
+Pt(6,1910,2741,30.0);
+Pt(6,2058,2875,30.0);
+Pt(6,2059,2874,30.0);
+Pt(6,2548,2875,30.0);
+Pt(6,2549,2874,30.0);
+Pt(6,2575,2732,30.0);
+Pt(6,2575,2732,30.0);
+Pt(6,2727,2732,30.0);
+Pt(6,2727,2732,30.0);
+Pt(6,3305,2875,30.0);
+Pt(6,3306,2874,30.0);
+Pt(6,3606,2732,30.0);
+Pt(6,3606,2732,30.0);
+Pt(6,3839,2732,30.0);
+Pt(6,3839,2732,30.0);
+Pt(6,1084,1021,30.0);
+Pt(6,1084,1021,30.0);
+Pt(6,1330,1021,30.0);
+Pt(6,1330,1021,30.0);
+Pt(6,2576,1021,30.0);
+Pt(6,2576,1021,30.0);
+Pt(6,2728,1021,30.0);
+Pt(6,2728,1021,30.0);
+Pt(6,3607,1021,30.0);
+Pt(6,3607,1021,30.0);
+Pt(6,3840,1021,30.0);
+Pt(6,3851,1011,30.0);
+Pt(6,1082,3490,30.0);
+Pt(6,1082,3490,30.0);
+Pt(6,1088,3490,30.0);
+Pt(6,1097,3482,30.0);
+Pt(6,2060,3490,30.0);
+Pt(6,2060,3490,30.0);
+Pt(6,1181,2882,30.0);
+Pt(6,1181,2882,30.0);
+Pt(6,1754,2882,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,1755,2881,30.0);
+Pt(6,1762,2875,30.0);
+Pt(6,2548,2875,30.0);
+Pt(6,2548,2875,30.0);
+Pt(6,3304,2875,30.0);
+Pt(6,3304,2875,30.0);
+Pt(6,4075,664,30.0);
+Pt(6,4075,664,30.0);
+Pt(6,4152,664,30.0);
+Pt(6,4152,664,30.0);
+Pt(6,4251,671,30.0);
+Pt(6,4259,664,30.0);
+Pt(6,1172,3418,30.0);
+Pt(6,1180,3411,30.0);
+Pt(6,1753,3411,30.0);
+Pt(6,1753,3411,30.0);
+Pt(6,2207,3418,30.0);
+Pt(6,2207,3418,30.0);
+Pt(6,4531,3418,30.0);
+Pt(6,4531,3418,30.0);
+Pt(6,2221,2474,30.0);
+Pt(6,2228,2468,30.0);
+Pt(6,1118,3281,30.0);
+Pt(6,1118,3281,30.0);
+Pt(6,1323,3281,30.0);
+Pt(6,1329,3276,30.0);
+Pt(6,1421,3276,30.0);
+Pt(6,1421,3276,30.0);
+Pt(6,2631,3281,30.0);
+Pt(6,2631,3281,30.0);
+Pt(6,2727,3276,30.0);
+Pt(6,2727,3276,30.0);
+Pt(6,3606,3276,30.0);
+Pt(6,3606,3276,30.0);
+Pt(6,3839,3276,30.0);
+Pt(6,3839,3276,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,1497,1847,30.0);
+Pt(6,2917,1847,30.0);
+Pt(6,2917,1847,30.0);
+Pt(6,4156,664,30.0);
+Pt(6,4157,663,30.0);
+Pt(6,4263,664,30.0);
+Pt(6,4267,660,30.0);
+Pt(6,1329,1226,30.0);
+Pt(6,1329,1226,30.0);
+Pt(6,1421,1226,30.0);
+Pt(6,1421,1226,30.0);
+Pt(6,2207,1358,30.0);
+Pt(6,2207,1357,30.0);
+Pt(6,2727,1226,30.0);
+Pt(6,2727,1226,30.0);
+Pt(6,3460,1358,30.0);
+Pt(6,3606,1226,30.0);
+Pt(6,3839,1226,30.0);
+Pt(6,3839,1226,30.0);
+Pt(6,4531,1358,30.0);
+Pt(6,4531,1357,30.0);
+Pt(6,1084,3493,30.0);
+Pt(6,1088,3490,30.0);
+Pt(6,1097,3490,30.0);
+Pt(6,1097,3490,30.0);
+Pt(6,1330,3493,30.0);
+Pt(6,1330,3493,30.0);
+Pt(6,1422,3493,30.0);
+Pt(6,1422,3493,30.0);
+Pt(6,2576,3493,30.0);
+Pt(6,2576,3493,30.0);
+Pt(6,2728,3493,30.0);
+Pt(6,2728,3493,30.0);
+Pt(6,3607,3493,30.0);
+Pt(6,3607,3493,30.0);
+Pt(6,3840,3493,30.0);
+Pt(6,3840,3493,30.0);
+Pt(6,4534,423,30.0);
+Pt(6,4537,420,30.0);
+Pt(6,874,3680,30.0);
+Pt(6,876,3678,30.0);
+Pt(6,1070,3678,30.0);
+Pt(6,1070,3678,30.0);
+Pt(6,2474,3678,30.0);
+Pt(6,2474,3678,30.0);
+Pt(6,3904,170,30.0);
+Pt(6,3904,170,30.0);
+Pt(6,1172,426,30.0);
+Pt(6,1172,426,30.0);
+Pt(6,2207,426,30.0);
+Pt(6,2207,426,30.0);
+Pt(6,3460,426,30.0);
+Pt(6,3460,426,30.0);
+Pt(6,4531,426,30.0);
+Pt(6,4533,424,30.0);
+Pt(6,1084,3276,30.0);
+Pt(6,1084,3276,30.0);
+Pt(6,1330,3276,30.0);
+Pt(6,1332,3274,30.0);
+Pt(6,1422,3276,30.0);
+Pt(6,1422,3276,30.0);
+Pt(6,2576,3276,30.0);
+Pt(6,2576,3276,30.0);
+Pt(6,2728,3276,30.0);
+Pt(6,2728,3276,30.0);
+Pt(6,3607,3276,30.0);
+Pt(6,3607,3276,30.0);
+Pt(6,3840,3276,30.0);
+Pt(6,3840,3276,30.0);
+Pt(6,1459,3164,30.0);
+Pt(6,1462,3162,30.0);
+Pt(6,1047,636,30.0);
+Pt(6,1047,636,30.0);
+Pt(6,3783,524,30.0);
+Pt(6,3783,524,30.0);
+Pt(6,4080,636,30.0);
+Pt(6,4080,636,30.0);
+Pt(6,4263,636,30.0);
+Pt(6,4263,636,30.0);
+Pt(6,4297,636,30.0);
+Pt(6,4305,629,30.0);
+Pt(6,4389,553,30.0);
+Pt(6,4400,544,30.0);
+Pt(6,4400,544,30.0);
+Pt(6,4422,524,30.0);
+Pt(6,1082,3495,30.0);
+Pt(6,1084,3493,30.0);
+Pt(6,1088,3495,30.0);
+Pt(6,1089,3495,30.0);
+Pt(6,2060,3495,30.0);
+Pt(6,2060,3495,30.0);
+Pt(6,2727,3493,30.0);
+Pt(6,2727,3493,30.0);
+Pt(6,2228,2468,30.0);
+Pt(6,2229,2466,30.0);
+Pt(6,3815,1042,30.0);
+Pt(6,3817,1041,30.0);
+Pt(6,2058,2179,30.0);
+Pt(6,2058,2179,30.0);
+Pt(6,2546,2180,30.0);
+Pt(6,2548,2179,30.0);
+Pt(6,3304,2179,30.0);
+Pt(6,3304,2179,30.0);
+Pt(6,2107,2591,30.0);
+Pt(6,2109,2590,30.0);
+Pt(6,4293,637,30.0);
+Pt(6,4294,636,30.0);
+Pt(6,1181,3410,30.0);
+Pt(6,1289,3312,30.0);
+Pt(6,1754,3410,30.0);
+Pt(6,1754,3410,30.0);
+Pt(6,5629,3493,30.0);
+} // End gp_plot_1 
+if (typeof(gnuplot.hide_gp_plot_2) == "undefined"|| !gnuplot.hide_gp_plot_2) {
+ctx.lineWidth = 3;
+ctx.strokeStyle = "rgb(000,000,000)";
+DT(gnuplot.solid);
+ctx.strokeStyle = "rgb(000,000,255)";
+ctx.strokeStyle = "rgb(000,000,000)";
+ctx.fillStyle = "rgb(000,000,000)";
+T(5339,3668,10.0,"Right","REV");
+ctx.strokeStyle = "rgb(000,000,255)";
+ctx.beginPath();
+M(5419,3618);
+L(5839,3618);
+M(1845,1884);
+M(2877,2799);
+M(3088,756);
+M(2475,1069);
+M(4075,1695);
+L(4076,1695);
+M(4263,1696);
+M(4152,1695);
+M(4259,1695);
+M(3414,2731);
+L(3414,2732);
+M(4267,1152);
+L(4267,1153);
+M(3692,660);
+L(3692,661);
+M(2028,2513);
+L(2029,2514);
+M(1088,420);
+L(1089,420);
+M(4537,3490);
+M(4268,1153);
+M(3691,660);
+M(2539,2183);
+M(2542,2186);
+M(4293,1184);
+M(2631,3411);
+M(3414,2245);
+M(1180,2105);
+L(1180,2106);
+M(4538,3495);
+M(2028,2498);
+L(2029,2498);
+M(1921,2245);
+M(2000,2245);
+M(2528,2186);
+M(2539,2196);
+M(1920,2180);
+M(1999,2180);
+M(1717,3490);
+M(1088,1069);
+M(3653,821);
+M(1083,1403);
+L(1084,1403);
+M(2575,1403);
+M(1088,2914);
+L(1088,2915);
+M(1097,848);
+M(1921,2155);
+M(2000,2155);
+M(3414,2155);
+L(3415,2155);
+M(3653,636);
+M(1921,3493);
+M(3414,3493);
+L(3415,3493);
+M(1999,3195);
+M(2000,3493);
+M(3653,821);
+M(1088,524);
+M(1097,524);
+L(1098,524);
+M(3414,2018);
+L(3414,2019);
+M(3657,3527);
+M(1422,2659);
+M(1920,1226);
+M(1323,3411);
+M(1180,3281);
+M(1335,2498);
+M(2679,3014);
+M(1606,2063);
+L(1607,2063);
+M(1921,2180);
+M(2000,2180);
+M(3414,2180);
+L(3415,2180);
+M(3414,2245);
+L(3415,2245);
+M(1716,3677);
+L(1717,3678);
+M(877,2915);
+M(1071,2915);
+M(2475,2915);
+M(2029,2514);
+L(2030,2515);
+M(1716,3482);
+L(1717,3482);
+M(2546,1403);
+L(2547,1403);
+M(3414,2180);
+M(2728,1403);
+M(3784,3490);
+M(1042,1184);
+M(3656,636);
+L(3657,637);
+M(1088,2915);
+M(1098,2915);
+M(3087,636);
+L(3088,637);
+M(1081,419);
+L(1082,420);
+M(3084,3525);
+L(3086,3527);
+M(2546,2658);
+L(2547,2659);
+M(3653,3525);
+L(3656,3527);
+M(1845,2797);
+L(1847,2799);
+M(4267,1153);
+L(4268,1153);
+M(876,524);
+L(877,524);
+M(1070,524);
+L(1071,524);
+M(2059,426);
+M(2474,524);
+L(2475,524);
+M(2485,504);
+M(2549,426);
+M(3305,426);
+L(3306,426);
+M(1084,1403);
+M(1171,1499);
+M(1330,1403);
+M(1422,1403);
+M(2575,1403);
+L(2576,1403);
+M(3459,1499);
+M(3606,1403);
+L(3607,1403);
+M(3840,1403);
+M(4530,1499);
+M(1117,3410);
+L(1118,3411);
+M(1322,3410);
+L(1323,3411);
+M(2630,3410);
+L(2631,3411);
+M(877,848);
+M(1071,848);
+M(1088,848);
+M(1098,848);
+M(2475,848);
+M(1084,2658);
+L(1084,2659);
+M(1329,2658);
+L(1330,2659);
+M(1421,2658);
+L(1422,2659);
+M(2575,2658);
+L(2576,2659);
+M(2727,2658);
+L(2728,2659);
+M(3606,2658);
+L(3607,2659);
+M(3839,2658);
+L(3840,2659);
+M(1717,1932);
+M(1920,2018);
+L(1920,2019);
+M(1999,2018);
+L(1999,2019);
+M(3784,1932);
+M(877,1069);
+M(1071,1069);
+M(1088,1069);
+M(1098,1069);
+M(3783,1932);
+M(3084,821);
+M(4618,795);
+M(1920,2245);
+M(1999,2245);
+M(2539,2185);
+M(2540,2186);
+M(4443,2235);
+L(4444,2235);
+M(2058,3418);
+M(2548,3418);
+M(3304,3418);
+L(3305,3418);
+M(1921,3195);
+M(2000,3195);
+M(3414,3195);
+L(3415,3195);
+M(1181,2106);
+M(1754,2106);
+M(1920,2155);
+M(1999,2155);
+M(3414,2155);
+M(1088,420);
+M(2059,419);
+L(2060,420);
+M(2229,374);
+M(1921,2019);
+M(2000,2019);
+M(3414,2019);
+L(3415,2019);
+M(4537,2634);
+M(1753,2105);
+L(1753,2106);
+M(4109,347);
+M(1172,1499);
+M(2207,1499);
+M(3460,1499);
+M(4531,1499);
+M(1180,3464);
+M(1753,3464);
+M(1044,1695);
+M(2059,1358);
+M(2549,1358);
+M(3305,1358);
+L(3306,1358);
+M(876,2914);
+L(876,2915);
+M(1070,2914);
+L(1070,2915);
+M(1118,2882);
+M(1323,2882);
+M(2474,2914);
+L(2474,2915);
+M(2631,2882);
+M(4076,1184);
+M(4152,1184);
+M(4259,1184);
+M(1181,3281);
+M(1754,3281);
+M(4533,1213);
+M(1920,3195);
+M(3414,3195);
+M(1047,1696);
+M(4080,1696);
+M(4297,1696);
+M(2228,374);
+M(4109,347);
+M(876,848);
+M(1070,848);
+M(2474,848);
+M(876,1069);
+M(1070,1069);
+M(2474,1069);
+M(1083,2658);
+L(1084,2658);
+M(1172,2634);
+M(1329,2658);
+M(1421,2658);
+M(2207,2634);
+M(2575,2658);
+M(2727,2658);
+M(3460,2634);
+M(3606,2658);
+M(3839,2658);
+M(4531,2634);
+M(1171,2179);
+M(3459,2179);
+M(4530,2179);
+M(1042,1695);
+M(4293,1695);
+M(1921,1021);
+M(2000,1021);
+M(3414,1021);
+L(3415,1021);
+M(3783,3677);
+L(3784,3678);
+M(1181,3464);
+M(1754,3464);
+M(3783,3482);
+M(1920,2732);
+M(1999,2732);
+M(1334,2498);
+L(1335,2498);
+M(1084,2659);
+M(1330,2659);
+M(2576,2659);
+M(2728,2659);
+M(3607,2659);
+M(3840,2659);
+M(2058,2486);
+M(2548,2486);
+M(3304,2486);
+M(1329,1403);
+M(1421,1403);
+M(2727,1403);
+M(3606,1403);
+M(3839,1403);
+M(1999,1226);
+M(3414,1226);
+M(4534,1213);
+M(2059,3418);
+L(2059,3419);
+M(2549,3418);
+L(2549,3419);
+M(3305,3418);
+L(3306,3419);
+M(2058,2486);
+M(2548,2486);
+M(3305,2486);
+M(1171,2874);
+L(1172,2875);
+M(1921,2732);
+M(2000,2732);
+M(2207,2875);
+M(3414,2732);
+L(3415,2732);
+M(3459,2874);
+L(3460,2875);
+M(4530,2874);
+L(4530,2875);
+M(1920,1021);
+M(1999,1021);
+M(3414,1021);
+M(1117,2882);
+M(1172,2875);
+M(1322,2882);
+M(2207,2875);
+M(2630,2882);
+M(3460,2875);
+M(4531,2875);
+M(1118,3411);
+M(2058,3418);
+M(2548,3418);
+M(3304,3418);
+M(1753,3281);
+M(1921,3276);
+M(2000,3276);
+M(3414,3276);
+L(3415,3276);
+M(1921,1226);
+M(2000,1226);
+M(2058,1357);
+L(2058,1358);
+M(2548,1357);
+L(2548,1358);
+M(3304,1357);
+L(3304,1358);
+M(3414,1226);
+L(3415,1226);
+M(1920,3493);
+M(1999,3493);
+M(3414,3493);
+M(1082,420);
+M(2060,420);
+M(1717,3678);
+M(3784,3678);
+M(2058,426);
+M(2548,426);
+M(3304,426);
+M(1920,3276);
+M(1999,3276);
+M(3414,3276);
+M(877,524);
+M(1071,524);
+M(1088,524);
+M(1098,524);
+M(2475,524);
+M(3084,636);
+M(3653,636);
+M(4537,3495);
+M(1172,2179);
+M(2207,2179);
+M(3460,2179);
+M(4531,2179);
+M(1334,2497);
+M(1117,3410);
+M(1322,3410);
+M(2630,3410);
+ctx.stroke();
+ctx.closePath();
+ctx.fillStyle = "rgb(000,000,255)";
+Pt(6,1845,1884,30.0);
+Pt(6,1845,1884,30.0);
+Pt(6,2877,2799,30.0);
+Pt(6,2877,2799,30.0);
+Pt(6,3088,756,30.0);
+Pt(6,3088,756,30.0);
+Pt(6,2475,1069,30.0);
+Pt(6,2475,1069,30.0);
+Pt(6,4075,1695,30.0);
+Pt(6,4076,1695,30.0);
+Pt(6,4263,1696,30.0);
+Pt(6,4263,1696,30.0);
+Pt(6,4152,1695,30.0);
+Pt(6,4152,1695,30.0);
+Pt(6,4259,1695,30.0);
+Pt(6,4259,1695,30.0);
+Pt(6,3414,2731,30.0);
+Pt(6,3414,2732,30.0);
+Pt(6,4267,1152,30.0);
+Pt(6,4267,1153,30.0);
+Pt(6,3692,660,30.0);
+Pt(6,3692,661,30.0);
+Pt(6,2028,2513,30.0);
+Pt(6,2029,2514,30.0);
+Pt(6,1088,420,30.0);
+Pt(6,1089,420,30.0);
+Pt(6,4537,3490,30.0);
+Pt(6,4537,3490,30.0);
+Pt(6,4268,1153,30.0);
+Pt(6,4268,1153,30.0);
+Pt(6,3691,660,30.0);
+Pt(6,3691,660,30.0);
+Pt(6,2539,2183,30.0);
+Pt(6,2539,2183,30.0);
+Pt(6,2542,2186,30.0);
+Pt(6,2542,2186,30.0);
+Pt(6,4293,1184,30.0);
+Pt(6,4293,1184,30.0);
+Pt(6,2631,3411,30.0);
+Pt(6,2631,3411,30.0);
+Pt(6,3414,2245,30.0);
+Pt(6,3414,2245,30.0);
+Pt(6,1180,2105,30.0);
+Pt(6,1180,2106,30.0);
+Pt(6,4538,3495,30.0);
+Pt(6,4538,3495,30.0);
+Pt(6,2028,2498,30.0);
+Pt(6,2029,2498,30.0);
+Pt(6,1921,2245,30.0);
+Pt(6,1921,2245,30.0);
+Pt(6,2000,2245,30.0);
+Pt(6,2000,2245,30.0);
+Pt(6,2528,2186,30.0);
+Pt(6,2528,2186,30.0);
+Pt(6,2539,2196,30.0);
+Pt(6,2539,2196,30.0);
+Pt(6,1920,2180,30.0);
+Pt(6,1920,2180,30.0);
+Pt(6,1999,2180,30.0);
+Pt(6,1999,2180,30.0);
+Pt(6,1717,3490,30.0);
+Pt(6,1717,3490,30.0);
+Pt(6,1088,1069,30.0);
+Pt(6,1088,1069,30.0);
+Pt(6,3653,821,30.0);
+Pt(6,3653,821,30.0);
+Pt(6,1083,1403,30.0);
+Pt(6,1084,1403,30.0);
+Pt(6,2575,1403,30.0);
+Pt(6,2575,1403,30.0);
+Pt(6,1088,2914,30.0);
+Pt(6,1088,2915,30.0);
+Pt(6,1097,848,30.0);
+Pt(6,1097,848,30.0);
+Pt(6,1921,2155,30.0);
+Pt(6,1921,2155,30.0);
+Pt(6,2000,2155,30.0);
+Pt(6,2000,2155,30.0);
+Pt(6,3414,2155,30.0);
+Pt(6,3415,2155,30.0);
+Pt(6,3653,636,30.0);
+Pt(6,3653,636,30.0);
+Pt(6,1921,3493,30.0);
+Pt(6,1921,3493,30.0);
+Pt(6,3414,3493,30.0);
+Pt(6,3415,3493,30.0);
+Pt(6,1999,3195,30.0);
+Pt(6,1999,3195,30.0);
+Pt(6,2000,3493,30.0);
+Pt(6,2000,3493,30.0);
+Pt(6,3653,821,30.0);
+Pt(6,3653,821,30.0);
+Pt(6,1088,524,30.0);
+Pt(6,1088,524,30.0);
+Pt(6,1097,524,30.0);
+Pt(6,1098,524,30.0);
+Pt(6,3414,2018,30.0);
+Pt(6,3414,2019,30.0);
+Pt(6,3657,3527,30.0);
+Pt(6,3657,3527,30.0);
+Pt(6,1422,2659,30.0);
+Pt(6,1422,2659,30.0);
+Pt(6,1920,1226,30.0);
+Pt(6,1920,1226,30.0);
+Pt(6,1323,3411,30.0);
+Pt(6,1323,3411,30.0);
+Pt(6,1180,3281,30.0);
+Pt(6,1180,3281,30.0);
+Pt(6,1335,2498,30.0);
+Pt(6,1335,2498,30.0);
+Pt(6,2679,3014,30.0);
+Pt(6,2679,3014,30.0);
+Pt(6,1606,2063,30.0);
+Pt(6,1607,2063,30.0);
+Pt(6,1921,2180,30.0);
+Pt(6,1921,2180,30.0);
+Pt(6,2000,2180,30.0);
+Pt(6,2000,2180,30.0);
+Pt(6,3414,2180,30.0);
+Pt(6,3415,2180,30.0);
+Pt(6,3414,2245,30.0);
+Pt(6,3415,2245,30.0);
+Pt(6,1716,3677,30.0);
+Pt(6,1717,3678,30.0);
+Pt(6,877,2915,30.0);
+Pt(6,877,2915,30.0);
+Pt(6,1071,2915,30.0);
+Pt(6,1071,2915,30.0);
+Pt(6,2475,2915,30.0);
+Pt(6,2475,2915,30.0);
+Pt(6,2029,2514,30.0);
+Pt(6,2030,2515,30.0);
+Pt(6,1716,3482,30.0);
+Pt(6,1717,3482,30.0);
+Pt(6,2546,1403,30.0);
+Pt(6,2547,1403,30.0);
+Pt(6,3414,2180,30.0);
+Pt(6,3414,2180,30.0);
+Pt(6,2728,1403,30.0);
+Pt(6,2728,1403,30.0);
+Pt(6,3784,3490,30.0);
+Pt(6,3784,3490,30.0);
+Pt(6,1042,1184,30.0);
+Pt(6,1042,1184,30.0);
+Pt(6,3656,636,30.0);
+Pt(6,3657,637,30.0);
+Pt(6,1088,2915,30.0);
+Pt(6,1088,2915,30.0);
+Pt(6,1098,2915,30.0);
+Pt(6,1098,2915,30.0);
+Pt(6,3087,636,30.0);
+Pt(6,3088,637,30.0);
+Pt(6,1081,419,30.0);
+Pt(6,1082,420,30.0);
+Pt(6,3084,3525,30.0);
+Pt(6,3086,3527,30.0);
+Pt(6,2546,2658,30.0);
+Pt(6,2547,2659,30.0);
+Pt(6,3653,3525,30.0);
+Pt(6,3656,3527,30.0);
+Pt(6,1845,2797,30.0);
+Pt(6,1847,2799,30.0);
+Pt(6,4267,1153,30.0);
+Pt(6,4268,1153,30.0);
+Pt(6,876,524,30.0);
+Pt(6,877,524,30.0);
+Pt(6,1070,524,30.0);
+Pt(6,1071,524,30.0);
+Pt(6,2059,426,30.0);
+Pt(6,2059,426,30.0);
+Pt(6,2474,524,30.0);
+Pt(6,2475,524,30.0);
+Pt(6,2485,504,30.0);
+Pt(6,2485,504,30.0);
+Pt(6,2485,504,30.0);
+Pt(6,2485,504,30.0);
+Pt(6,2549,426,30.0);
+Pt(6,2549,426,30.0);
+Pt(6,3305,426,30.0);
+Pt(6,3306,426,30.0);
+Pt(6,1084,1403,30.0);
+Pt(6,1084,1403,30.0);
+Pt(6,1171,1499,30.0);
+Pt(6,1171,1499,30.0);
+Pt(6,1330,1403,30.0);
+Pt(6,1330,1403,30.0);
+Pt(6,1422,1403,30.0);
+Pt(6,1422,1403,30.0);
+Pt(6,2575,1403,30.0);
+Pt(6,2576,1403,30.0);
+Pt(6,3459,1499,30.0);
+Pt(6,3459,1499,30.0);
+Pt(6,3606,1403,30.0);
+Pt(6,3607,1403,30.0);
+Pt(6,3840,1403,30.0);
+Pt(6,3840,1403,30.0);
+Pt(6,4530,1499,30.0);
+Pt(6,4530,1499,30.0);
+Pt(6,1117,3410,30.0);
+Pt(6,1118,3411,30.0);
+Pt(6,1322,3410,30.0);
+Pt(6,1323,3411,30.0);
+Pt(6,2630,3410,30.0);
+Pt(6,2631,3411,30.0);
+Pt(6,877,848,30.0);
+Pt(6,877,848,30.0);
+Pt(6,1071,848,30.0);
+Pt(6,1071,848,30.0);
+Pt(6,1088,848,30.0);
+Pt(6,1088,848,30.0);
+Pt(6,1098,848,30.0);
+Pt(6,1098,848,30.0);
+Pt(6,2475,848,30.0);
+Pt(6,2475,848,30.0);
+Pt(6,1084,2658,30.0);
+Pt(6,1084,2659,30.0);
+Pt(6,1329,2658,30.0);
+Pt(6,1330,2659,30.0);
+Pt(6,1421,2658,30.0);
+Pt(6,1422,2659,30.0);
+Pt(6,2575,2658,30.0);
+Pt(6,2576,2659,30.0);
+Pt(6,2727,2658,30.0);
+Pt(6,2728,2659,30.0);
+Pt(6,3606,2658,30.0);
+Pt(6,3607,2659,30.0);
+Pt(6,3839,2658,30.0);
+Pt(6,3840,2659,30.0);
+Pt(6,1717,1932,30.0);
+Pt(6,1717,1932,30.0);
+Pt(6,1920,2018,30.0);
+Pt(6,1920,2019,30.0);
+Pt(6,1999,2018,30.0);
+Pt(6,1999,2019,30.0);
+Pt(6,3784,1932,30.0);
+Pt(6,3784,1932,30.0);
+Pt(6,877,1069,30.0);
+Pt(6,877,1069,30.0);
+Pt(6,1071,1069,30.0);
+Pt(6,1071,1069,30.0);
+Pt(6,1088,1069,30.0);
+Pt(6,1088,1069,30.0);
+Pt(6,1098,1069,30.0);
+Pt(6,1098,1069,30.0);
+Pt(6,3783,1932,30.0);
+Pt(6,3783,1932,30.0);
+Pt(6,3084,821,30.0);
+Pt(6,3084,821,30.0);
+Pt(6,4618,795,30.0);
+Pt(6,4618,795,30.0);
+Pt(6,4618,795,30.0);
+Pt(6,4618,795,30.0);
+Pt(6,1920,2245,30.0);
+Pt(6,1920,2245,30.0);
+Pt(6,1999,2245,30.0);
+Pt(6,1999,2245,30.0);
+Pt(6,2539,2185,30.0);
+Pt(6,2539,2185,30.0);
+Pt(6,2540,2186,30.0);
+Pt(6,2540,2186,30.0);
+Pt(6,4443,2235,30.0);
+Pt(6,4443,2235,30.0);
+Pt(6,4443,2235,30.0);
+Pt(6,4443,2235,30.0);
+Pt(6,4443,2235,30.0);
+Pt(6,4444,2235,30.0);
+Pt(6,2058,3418,30.0);
+Pt(6,2058,3418,30.0);
+Pt(6,2548,3418,30.0);
+Pt(6,2548,3418,30.0);
+Pt(6,3304,3418,30.0);
+Pt(6,3305,3418,30.0);
+Pt(6,1921,3195,30.0);
+Pt(6,1921,3195,30.0);
+Pt(6,2000,3195,30.0);
+Pt(6,2000,3195,30.0);
+Pt(6,3414,3195,30.0);
+Pt(6,3415,3195,30.0);
+Pt(6,1181,2106,30.0);
+Pt(6,1181,2106,30.0);
+Pt(6,1754,2106,30.0);
+Pt(6,1754,2106,30.0);
+Pt(6,1920,2155,30.0);
+Pt(6,1920,2155,30.0);
+Pt(6,1999,2155,30.0);
+Pt(6,1999,2155,30.0);
+Pt(6,3414,2155,30.0);
+Pt(6,3414,2155,30.0);
+Pt(6,1088,420,30.0);
+Pt(6,1088,420,30.0);
+Pt(6,2059,419,30.0);
+Pt(6,2060,420,30.0);
+Pt(6,2229,374,30.0);
+Pt(6,2229,374,30.0);
+Pt(6,1921,2019,30.0);
+Pt(6,1921,2019,30.0);
+Pt(6,2000,2019,30.0);
+Pt(6,2000,2019,30.0);
+Pt(6,3414,2019,30.0);
+Pt(6,3415,2019,30.0);
+Pt(6,4537,2634,30.0);
+Pt(6,4537,2634,30.0);
+Pt(6,1753,2105,30.0);
+Pt(6,1753,2106,30.0);
+Pt(6,4109,347,30.0);
+Pt(6,4109,347,30.0);
+Pt(6,1172,1499,30.0);
+Pt(6,1172,1499,30.0);
+Pt(6,2207,1499,30.0);
+Pt(6,2207,1499,30.0);
+Pt(6,3460,1499,30.0);
+Pt(6,3460,1499,30.0);
+Pt(6,4531,1499,30.0);
+Pt(6,4531,1499,30.0);
+Pt(6,1180,3464,30.0);
+Pt(6,1180,3464,30.0);
+Pt(6,1753,3464,30.0);
+Pt(6,1753,3464,30.0);
+Pt(6,1044,1695,30.0);
+Pt(6,1044,1695,30.0);
+Pt(6,2059,1358,30.0);
+Pt(6,2059,1358,30.0);
+Pt(6,2549,1358,30.0);
+Pt(6,2549,1358,30.0);
+Pt(6,3305,1358,30.0);
+Pt(6,3306,1358,30.0);
+Pt(6,876,2914,30.0);
+Pt(6,876,2915,30.0);
+Pt(6,1070,2914,30.0);
+Pt(6,1070,2915,30.0);
+Pt(6,1118,2882,30.0);
+Pt(6,1118,2882,30.0);
+Pt(6,1323,2882,30.0);
+Pt(6,1323,2882,30.0);
+Pt(6,2474,2914,30.0);
+Pt(6,2474,2915,30.0);
+Pt(6,2631,2882,30.0);
+Pt(6,2631,2882,30.0);
+Pt(6,4076,1184,30.0);
+Pt(6,4076,1184,30.0);
+Pt(6,4152,1184,30.0);
+Pt(6,4152,1184,30.0);
+Pt(6,4259,1184,30.0);
+Pt(6,4259,1184,30.0);
+Pt(6,1181,3281,30.0);
+Pt(6,1181,3281,30.0);
+Pt(6,1754,3281,30.0);
+Pt(6,1754,3281,30.0);
+Pt(6,4533,1213,30.0);
+Pt(6,4533,1213,30.0);
+Pt(6,1920,3195,30.0);
+Pt(6,1920,3195,30.0);
+Pt(6,3414,3195,30.0);
+Pt(6,3414,3195,30.0);
+Pt(6,1047,1696,30.0);
+Pt(6,1047,1696,30.0);
+Pt(6,4080,1696,30.0);
+Pt(6,4080,1696,30.0);
+Pt(6,4297,1696,30.0);
+Pt(6,4297,1696,30.0);
+Pt(6,2228,374,30.0);
+Pt(6,2228,374,30.0);
+Pt(6,4109,347,30.0);
+Pt(6,4109,347,30.0);
+Pt(6,876,848,30.0);
+Pt(6,876,848,30.0);
+Pt(6,1070,848,30.0);
+Pt(6,1070,848,30.0);
+Pt(6,2474,848,30.0);
+Pt(6,2474,848,30.0);
+Pt(6,876,1069,30.0);
+Pt(6,876,1069,30.0);
+Pt(6,1070,1069,30.0);
+Pt(6,1070,1069,30.0);
+Pt(6,2474,1069,30.0);
+Pt(6,2474,1069,30.0);
+Pt(6,1083,2658,30.0);
+Pt(6,1084,2658,30.0);
+Pt(6,1172,2634,30.0);
+Pt(6,1172,2634,30.0);
+Pt(6,1329,2658,30.0);
+Pt(6,1329,2658,30.0);
+Pt(6,1421,2658,30.0);
+Pt(6,1421,2658,30.0);
+Pt(6,2207,2634,30.0);
+Pt(6,2207,2634,30.0);
+Pt(6,2575,2658,30.0);
+Pt(6,2575,2658,30.0);
+Pt(6,2727,2658,30.0);
+Pt(6,2727,2658,30.0);
+Pt(6,3460,2634,30.0);
+Pt(6,3460,2634,30.0);
+Pt(6,3606,2658,30.0);
+Pt(6,3606,2658,30.0);
+Pt(6,3839,2658,30.0);
+Pt(6,3839,2658,30.0);
+Pt(6,4531,2634,30.0);
+Pt(6,4531,2634,30.0);
+Pt(6,1171,2179,30.0);
+Pt(6,1171,2179,30.0);
+Pt(6,3459,2179,30.0);
+Pt(6,3459,2179,30.0);
+Pt(6,4530,2179,30.0);
+Pt(6,4530,2179,30.0);
+Pt(6,1042,1695,30.0);
+Pt(6,1042,1695,30.0);
+Pt(6,4293,1695,30.0);
+Pt(6,4293,1695,30.0);
+Pt(6,1921,1021,30.0);
+Pt(6,1921,1021,30.0);
+Pt(6,2000,1021,30.0);
+Pt(6,2000,1021,30.0);
+Pt(6,3414,1021,30.0);
+Pt(6,3415,1021,30.0);
+Pt(6,3783,3677,30.0);
+Pt(6,3784,3678,30.0);
+Pt(6,1181,3464,30.0);
+Pt(6,1181,3464,30.0);
+Pt(6,1754,3464,30.0);
+Pt(6,1754,3464,30.0);
+Pt(6,3783,3482,30.0);
+Pt(6,3783,3482,30.0);
+Pt(6,1920,2732,30.0);
+Pt(6,1920,2732,30.0);
+Pt(6,1999,2732,30.0);
+Pt(6,1999,2732,30.0);
+Pt(6,1334,2498,30.0);
+Pt(6,1335,2498,30.0);
+Pt(6,1084,2659,30.0);
+Pt(6,1084,2659,30.0);
+Pt(6,1330,2659,30.0);
+Pt(6,1330,2659,30.0);
+Pt(6,2576,2659,30.0);
+Pt(6,2576,2659,30.0);
+Pt(6,2728,2659,30.0);
+Pt(6,2728,2659,30.0);
+Pt(6,3607,2659,30.0);
+Pt(6,3607,2659,30.0);
+Pt(6,3840,2659,30.0);
+Pt(6,3840,2659,30.0);
+Pt(6,2058,2486,30.0);
+Pt(6,2058,2486,30.0);
+Pt(6,2548,2486,30.0);
+Pt(6,2548,2486,30.0);
+Pt(6,3304,2486,30.0);
+Pt(6,3304,2486,30.0);
+Pt(6,1329,1403,30.0);
+Pt(6,1329,1403,30.0);
+Pt(6,1421,1403,30.0);
+Pt(6,1421,1403,30.0);
+Pt(6,2727,1403,30.0);
+Pt(6,2727,1403,30.0);
+Pt(6,3606,1403,30.0);
+Pt(6,3606,1403,30.0);
+Pt(6,3839,1403,30.0);
+Pt(6,3839,1403,30.0);
+Pt(6,1999,1226,30.0);
+Pt(6,1999,1226,30.0);
+Pt(6,3414,1226,30.0);
+Pt(6,3414,1226,30.0);
+Pt(6,4534,1213,30.0);
+Pt(6,4534,1213,30.0);
+Pt(6,2059,3418,30.0);
+Pt(6,2059,3419,30.0);
+Pt(6,2549,3418,30.0);
+Pt(6,2549,3419,30.0);
+Pt(6,3305,3418,30.0);
+Pt(6,3306,3419,30.0);
+Pt(6,2058,2486,30.0);
+Pt(6,2058,2486,30.0);
+Pt(6,2548,2486,30.0);
+Pt(6,2548,2486,30.0);
+Pt(6,3305,2486,30.0);
+Pt(6,3305,2486,30.0);
+Pt(6,1171,2874,30.0);
+Pt(6,1172,2875,30.0);
+Pt(6,1921,2732,30.0);
+Pt(6,1921,2732,30.0);
+Pt(6,2000,2732,30.0);
+Pt(6,2000,2732,30.0);
+Pt(6,2207,2875,30.0);
+Pt(6,2207,2875,30.0);
+Pt(6,3414,2732,30.0);
+Pt(6,3415,2732,30.0);
+Pt(6,3459,2874,30.0);
+Pt(6,3460,2875,30.0);
+Pt(6,4530,2874,30.0);
+Pt(6,4530,2875,30.0);
+Pt(6,1920,1021,30.0);
+Pt(6,1920,1021,30.0);
+Pt(6,1999,1021,30.0);
+Pt(6,1999,1021,30.0);
+Pt(6,3414,1021,30.0);
+Pt(6,3414,1021,30.0);
+Pt(6,1117,2882,30.0);
+Pt(6,1117,2882,30.0);
+Pt(6,1172,2875,30.0);
+Pt(6,1172,2875,30.0);
+Pt(6,1322,2882,30.0);
+Pt(6,1322,2882,30.0);
+Pt(6,2207,2875,30.0);
+Pt(6,2207,2875,30.0);
+Pt(6,2630,2882,30.0);
+Pt(6,2630,2882,30.0);
+Pt(6,3460,2875,30.0);
+Pt(6,3460,2875,30.0);
+Pt(6,4531,2875,30.0);
+Pt(6,4531,2875,30.0);
+Pt(6,1118,3411,30.0);
+Pt(6,1118,3411,30.0);
+Pt(6,2058,3418,30.0);
+Pt(6,2058,3418,30.0);
+Pt(6,2548,3418,30.0);
+Pt(6,2548,3418,30.0);
+Pt(6,3304,3418,30.0);
+Pt(6,3304,3418,30.0);
+Pt(6,1753,3281,30.0);
+Pt(6,1753,3281,30.0);
+Pt(6,1921,3276,30.0);
+Pt(6,1921,3276,30.0);
+Pt(6,2000,3276,30.0);
+Pt(6,2000,3276,30.0);
+Pt(6,3414,3276,30.0);
+Pt(6,3415,3276,30.0);
+Pt(6,1921,1226,30.0);
+Pt(6,1921,1226,30.0);
+Pt(6,2000,1226,30.0);
+Pt(6,2000,1226,30.0);
+Pt(6,2058,1357,30.0);
+Pt(6,2058,1358,30.0);
+Pt(6,2548,1357,30.0);
+Pt(6,2548,1358,30.0);
+Pt(6,3304,1357,30.0);
+Pt(6,3304,1358,30.0);
+Pt(6,3414,1226,30.0);
+Pt(6,3415,1226,30.0);
+Pt(6,1920,3493,30.0);
+Pt(6,1920,3493,30.0);
+Pt(6,1999,3493,30.0);
+Pt(6,1999,3493,30.0);
+Pt(6,3414,3493,30.0);
+Pt(6,3414,3493,30.0);
+Pt(6,1082,420,30.0);
+Pt(6,1082,420,30.0);
+Pt(6,2060,420,30.0);
+Pt(6,2060,420,30.0);
+Pt(6,1717,3678,30.0);
+Pt(6,1717,3678,30.0);
+Pt(6,3784,3678,30.0);
+Pt(6,3784,3678,30.0);
+Pt(6,2058,426,30.0);
+Pt(6,2058,426,30.0);
+Pt(6,2548,426,30.0);
+Pt(6,2548,426,30.0);
+Pt(6,3304,426,30.0);
+Pt(6,3304,426,30.0);
+Pt(6,1920,3276,30.0);
+Pt(6,1920,3276,30.0);
+Pt(6,1999,3276,30.0);
+Pt(6,1999,3276,30.0);
+Pt(6,3414,3276,30.0);
+Pt(6,3414,3276,30.0);
+Pt(6,877,524,30.0);
+Pt(6,877,524,30.0);
+Pt(6,1071,524,30.0);
+Pt(6,1071,524,30.0);
+Pt(6,1088,524,30.0);
+Pt(6,1088,524,30.0);
+Pt(6,1098,524,30.0);
+Pt(6,1098,524,30.0);
+Pt(6,2475,524,30.0);
+Pt(6,2475,524,30.0);
+Pt(6,3084,636,30.0);
+Pt(6,3084,636,30.0);
+Pt(6,3653,636,30.0);
+Pt(6,3653,636,30.0);
+Pt(6,4537,3495,30.0);
+Pt(6,4537,3495,30.0);
+Pt(6,1172,2179,30.0);
+Pt(6,1172,2179,30.0);
+Pt(6,2207,2179,30.0);
+Pt(6,2207,2179,30.0);
+Pt(6,3460,2179,30.0);
+Pt(6,3460,2179,30.0);
+Pt(6,4531,2179,30.0);
+Pt(6,4531,2179,30.0);
+Pt(6,1334,2497,30.0);
+Pt(6,1334,2497,30.0);
+Pt(6,1117,3410,30.0);
+Pt(6,1117,3410,30.0);
+Pt(6,1322,3410,30.0);
+Pt(6,1322,3410,30.0);
+Pt(6,2630,3410,30.0);
+Pt(6,2630,3410,30.0);
+Pt(6,5629,3618,30.0);
+} // End gp_plot_2 
+ctx.lineWidth = 2;
+ctx.strokeStyle = "rgb(000,000,000)";
+DT(gnuplot.solid);
+ctx.lineWidth = 1;
+
+// plot boundaries and axis scaling information for mousing 
+gnuplot.plot_term_xmax = 600;
+gnuplot.plot_term_ymax = 400;
+gnuplot.plot_xmin = 86.0;
+gnuplot.plot_xmax = 493.9;
+gnuplot.plot_ybot = 368.0;
+gnuplot.plot_ytop = 16.1;
+gnuplot.plot_width = 407.9;
+gnuplot.plot_height = 351.9;
+gnuplot.plot_axis_xmin = 1;
+gnuplot.plot_axis_xmax = 5e+06;
+gnuplot.plot_axis_ymin = 1;
+gnuplot.plot_axis_ymax = 4.755e+06;
+gnuplot.plot_axis_x2min = "none"
+gnuplot.plot_axis_y2min = "none"
+gnuplot.plot_logaxis_x = 0;
+gnuplot.plot_logaxis_y = 0;
+gnuplot.plot_axis_width = gnuplot.plot_axis_xmax - gnuplot.plot_axis_xmin;
+gnuplot.plot_axis_height = gnuplot.plot_axis_ymax - gnuplot.plot_axis_ymin;
+gnuplot.plot_timeaxis_x = "";
+gnuplot.plot_timeaxis_y = "";
+}
+</script>
+<style type="text/css" rel="stylesheet" name="gnuplot_mouse.css">
+        canvas		{ border:0; background-color: white; }
+        td.mousebox	{ vertical-align: top; }
+        td.mbh		{ height: 16pt; }
+        td.mb0		{ text-align: left; font-size: smaller; width: 20px; padding-left: 15px;
+        		  color:#000; background-color: #EEE}
+        td.mb1		{ text-align: left; font-size: smaller; width: 80px; padding-left: 15px;
+        		  color:#070; background-color: #EEE}
+        td.icon		{ width:  16px; height: 16px; font-size: 14px; text-align: right;
+        		  background-color: #EEE}
+        td.blank	{ height: 16px; font-size: 12pt; text-align: right;
+        		  background-color: #EEE}
+        .icon-image	{ float:right; margin: 0 0 0 0; }
+        .noborder	{ border: 0; vertical-align: text-top; }
+        table.mbleft	{ border-collapse: collapse; border: 0; margin-left: auto; margin-right: auto; }
+        table.mbright	{ border-collapse: collapse; border: 0; margin-left: 0; margin-right: auto; }
+        table.mbunder	{ border-collapse: collapse; border: 0; margin-left: auto; margin-right: auto; }
+        table.plot	{ border-collapse: collapse; border: 0; margin-left: auto; margin-right: auto; }
+        table.mousebox	{ border-collapse: collapse; margin-left: 0; margin-right: 10px; border: 0; }
+        div.gnuplot	{ background-color: white; }
+        
+    </style>
+</head>
+<body onload="gnuplot_canvas(); gnuplot.init();" oncontextmenu="return false;">
+
+<div class="gnuplot">
+<canvas id="Tile" width="32" height="32" hidden></canvas>
+<table class="plot">
+<tr><td>
+    <canvas id="gnuplot_canvas" width="600" height="400" tabindex="0">
+	Sorry, your browser seems not to support the HTML 5 canvas element
+    </canvas>
+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+Writing filtered delta file /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/nucmer_output/scaffolds.filter
+Reading delta file /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/nucmer_output/scaffolds.delta
+Writing plot files /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/nucmer_output/scaffolds.fplot, /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/nucmer_output/scaffolds.rplot
+ERROR: No alignment data to plot
+Stderr outputs for reference parts are in:
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part1
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part2
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part3
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part4
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part5
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part6
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part7
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part8
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part9
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part10
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part11
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part12
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part13
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part14
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part15
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part16
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part17
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part18
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part19
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part20
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part21
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part22
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part23
+/home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stderr_part24
+
+2  Nothing aligned for /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/quast_corrected_input/scaffolds.fasta

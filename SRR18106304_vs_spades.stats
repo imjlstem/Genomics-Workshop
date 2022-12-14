@@ -1,0 +1,39 @@
+K-mer statistics for: 
+ - Hash 1: "SRR18106304.fastq"
+ - Hash 2: "ecoli_hiseq_spades/scaffolds.fasta"
+
+Total K-mers in: 
+ - Hash 1: 1811650370
+ - Hash 2: 5460266
+
+Distinct K-mers in:
+ - Hash 1: 55567541
+ - Hash 2: 5426426
+
+Total K-mers only found in:
+ - Hash 1: 59648448
+ - Hash 2: 4113
+
+Distinct K-mers only found in:
+ - Hash 1: 50145223
+ - Hash 2: 4108
+
+Shared K-mers:
+ - Total shared found in hash 1: 1752001922
+ - Total shared found in hash 2: 5456153
+ - Distinct shared K-mers: 5422318
+
+Distance between spectra 1 and 2 (all k-mers):
+ - Manhattan distance: 5.01411e+07
+ - Euclidean distance: 4.04354e+07
+ - Cosine distance: 0.00389544
+ - Canberra distance: 987.373
+ - Jaccard distance: 0.902345
+
+Distance between spectra 1 and 2 (shared k-mers):
+ - Manhattan distance: 9.80406e+06
+ - Euclidean distance: 4.9212e+06
+ - Cosine distance: 0.245422
+ - Canberra distance: 972.282
+ - Jaccard distance: 0.949606
+

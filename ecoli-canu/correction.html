@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>canu analysis for assembly 'ecoli' in directory 'correction'</title>
+<style type='text/css'>
+body       { font-family: Helvetica, Verdana, sans-serif; }
+h1, h2, h3 { color: #ee3e80; }
+p          { color: #665544; }
+th, td     { border: 1px solid #111111; padding: 2px 2px 2px 2px; }
+td:hover   { background-color: #e4e4e4; }
+th:hover   { background-color: #d4d4d4; }
+tr.details { visibility: collapse; }
+</style>
+</head>
+
+<body>
+
+<h1>Correction</h1>
+<h2>Input Reads</h2>
+
+<table>
+<tr id='gkpload0'><td colspan='2'>/home/taller-2048/GENOMICS_WORKSHOP/ERR1674581.fastq</td></tr>
+<tr class='details'><td rowspan='8'>Parameters</td><td>preset = N/A</td></tr>
+<tr class='details'><td>defaultQV = 20</td></tr>
+<tr class='details'><td>isNonRandom = false</td></tr>
+<tr class='details'><td>removeDuplicateReads = true</td></tr>
+<tr class='details'><td>finalTrim = true</td></tr>
+<tr class='details'><td>removeSpurReads = true</td></tr>
+<tr class='details'><td>removeChimericReads = true</td></tr>
+<tr class='details'><td>checkForSubReads = true</td></tr>
+<tr class='details'><td rowspan='2'>FASTA</td><td>0 reads (0 bp)</td></tr>
+<tr class='details'><td>0 reads (0 bp) were short and not loaded</td></tr>
+<tr class='details'><td rowspan='2'>FASTQ</td><td>854 reads (8331171 bp)</td></tr>
+<tr class='details'><td>249 reads (95240 bp) were short and not loaded</td></tr>
+<tr><td colspan='2'>854 reads (8331171 bp) loaded, 249 reads (95240 bp) skipped, 0 warnings</td></tr>
+</table>
+
+<h2>Final Store</h2>
+
+<table>
+<tr><td colspan='2'>correction/ecoli.gkpStore</td></tr>
+<tr><td>readsLoaded</td><td>854 reads (8331171 bp)</td></tr>
+<tr><td>readsSkipped</td><td>249 reads (95240 bp) (read was too short)</td></tr>
+<tr><td>warnings</td><td>0 warnings (invalid base or quality value)</td></tr>
+</table>
+<h3>Read Length Histogram</h3>
+<figure>
+<a href='correction.html.files/readlengths.lg.png'><img src='correction.html.files/readlengths.sm.png'></a>
+<figcaption>
+
+</figcaption>
+</figure>
+<h2>k-Mer Counts</h2>
+
+<figure>
+<a href='correction.html.files/ecoli.ms16.histogram.lg.png'><img src='correction.html.files/ecoli.ms16.histogram.sm.png'></a>
+<figcaption>
+Histogram for k=16 with 8318361 mers, 8034645 distinct mers and 7826517 single-copy mers.  Largest count is 501.
+</figcaption>
+</figure>
+<h2>Overlaps</h2>
+
+<p>Overlaps not computed.</p>
+<h2>Overlap Filtering</h2>
+
+<table>
+<tr><th colspan='3'>PARAMETERS</th></tr>
+<tr><td rowspan='4'></td><td>40</td><td>expected coverage</td></tr>
+<tr><td>0</td><td>don't use overlaps shorter than this</td></tr>
+<tr><td>0.000</td><td>don't use overlaps with erate less than this</td></tr>
+<tr><td>1.000</td><td>don't use overlaps with erate more than this</td></tr>
+<tr><th colspan='3'>OVERLAPS</th></tr>
+<tr><td rowspan='4'>Ignored</td><td>0</td><td>< 0.0000 fraction error</td></tr>
+<tr><td>0</td><td>> 0.4095 fraction error</td></tr>
+<tr><td>0</td><td>< 0 bases long</td></tr>
+<tr><td>0</td><td>> 2097151 bases long</td></tr>
+<tr><td rowspan='1'>Filtered</td><td>0</td><td>too many overlaps, discard these shortest ones</td></tr>
+<tr><td rowspan='1'>Evidence</td><td>862</td><td>longest overlaps</td></tr>
+<tr><td rowspan='1'>Total</td><td>862</td><td>all overlaps</td></tr>
+<tr><th colspan='3'>READS</th></tr>
+<tr><td rowspan='6'></td><td>628</td><td>no overlaps</td></tr>
+<tr><td>226</td><td>no overlaps filtered</td></tr>
+<tr><td>0</td><td><  50% overlaps filtered</td></tr>
+<tr><td>0</td><td><  80% overlaps filtered</td></tr>
+<tr><td>0</td><td><  95% overlaps filtered</td></tr>
+<tr><td>0</td><td>< 100% overlaps filtered</td></tr>
+</table>
+<h2>Read Correction</h2>
+
+<p>Filter method: corFilter=expensive.  Expect to correct 226 reads with bp to bp.</p>
+<table>
+<tr><th colspan='3'>INPUTS</th></tr>
+<tr><td>226</td><td>input reads</td></tr>
+<tr><td>1653061</td><td>input bases</td></tr>
+<tr><th colspan='3'>OUTPUTS</th></tr>
+<tr><td>106</td><td>reads that failed to generate any corrected bases</td></tr>
+<tr><td>120</td><td>corrected read pieces</td></tr>
+<tr><td>827543</td><td>corrected bases</td></tr>
+<tr><th colspan='3'>PIECES PER READ</th></tr>
+<tr><td>0</td><td>106</td></tr>
+<tr><td>1</td><td>120</td></tr>
+</table>
+<p>A single input read can be split into multiple output reads, or possibly not even output at all.</p>
+<figure>
+<a href='correction.html.files/ecoli.estimate.original-x-corrected.lg.png'><img src='correction.html.files/ecoli.estimate.original-x-corrected.sm.png'></a>
+<figcaption>
+Scatter plot of the original read length (X axis) against the expected corrected read length (Y axis).
+Colors show a comparison of the simple filter (which doesn't use overlaps) to the expensive filter (which does).
+A large green triangle (false negatives) hints that there could be abnormally low quality regions in the reads.
+
+</figcaption>
+</figure>
+<figure>
+<a href='correction.html.files/ecoli.originalLength-vs-expectedLength.lg.png'><img src='correction.html.files/ecoli.originalLength-vs-expectedLength.sm.png'></a>
+<figcaption>
+Scatter plot of original vs expected read length.  Shown in filter plot above.
+</figcaption>
+</figure>
+<figure>
+<a href='correction.html.files/ecoli.originalLength-vs-correctedLength.lg.png'><img src='correction.html.files/ecoli.originalLength-vs-correctedLength.sm.png'></a>
+<figcaption>
+Scatter plot of original vs corrected read length.
+</figcaption>
+</figure>
+<figure>
+<a href='correction.html.files/ecoli.expectedLength-vs-correctedLength.lg.png'><img src='correction.html.files/ecoli.expectedLength-vs-correctedLength.sm.png'></a>
+<figcaption>
+Scatter plot of expected vs corrected read length.
+</figcaption>
+</figure>
+<figure>
+<a href='correction.html.files/ecoli.length-difference-histograms.lg.png'><img src='correction.html.files/ecoli.length-difference-histograms.sm.png'></a>
+<figcaption>
+Histogram of the difference between the expected and corrected read lengths.
+Note that a negative difference means the corrected read is larger than expected.
+
+</figcaption>
+</figure>
+<figure>
+<a href='correction.html.files/ecoli.length-histograms.lg.png'><img src='correction.html.files/ecoli.length-histograms.sm.png'></a>
+<figcaption>
+Histogram of original (red), expected (green) and actual corrected (blue) read lengths.
+
+</figcaption>
+</figure>
+
+<script type='text/javascript'>
+var toggleTable = function() {
+  var table = this.closest('table');
+  var elts  = table.querySelectorAll('.details');
+
+  for (var i=0; i<elts.length; i++) {
+    if (!elts[i].enabled) {
+      elts[i].enabled = true;
+      elts[i].style.visibility = 'visible';
+    } else {
+      elts[i].enabled = false;
+      elts[i].style.visibility = 'collapse';
+    }
+  }
+}
+document.getElementById('gkpload0').onclick = toggleTable;
+document.getElementById('gkpload0').style   = 'cursor: pointer;';
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+Canu v1.6 (+0 commits) r0 .
+
+Current Working Directory:
+/home/taller-2048/GENOMICS_WORKSHOP/ecoli-canu/correction/1-overlapper
+
+Command:
+/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/gatekeeperDumpFASTQ \
+  -G ../ecoli.gkpStore \
+  -b 1 \
+  -e 854 \
+  -nolibname \
+  -fasta \
+  -o ./blocks/000001.input

@@ -1,0 +1,45 @@
+#!/bin/bash
+#SBATCH --job-name=RNAseq-gene-annotation
+#SBATCH --output=RNAseq-gene-annotation.out
+#SBATCH --partition=dribe
+#SBATCH --ntasks=72
+#SBATCH --time=72:00:00
+
+module load miniconda/3
+
+################### 8.1 Data dowload  #####################
+ 
+
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/932/276/165/GCF_932276165.1_ilPluXylo3.1/GCF_932276165.1_ilPluXylo3.1_genomic.fna.gz
+
+
+################### 8.2 Mapping  #####################
+
+module load hisat2/2.0.3-beta
+
+hisat2-build GCF_932276165.1_ilPluXylo3.1_genomic.fna GCF_932276165.1_ilPluXylo3.1_genomic_hisat2_index
+hisat2 -S SRR15042536.sam -p 55 --rna-strandness=FR -x $BOWTIE_INDEX -1 $INPUT_R1 -2 $INPUT_R2 --summary-file $OUTOUT_DIR.summary
+
+module load samtools/1.16
+
+samtools sort -o SRR15042536.sorted.bam SRR15042536.sam
+samtools index SRR15042536.sorted.bam
+
+################### 8.3 Transcrip assembly  #####################
+
+module load Stringtie/1.3.4
+stringtie -o SRR15042536.gff SRR15042536.sorted.bam
+
+
+
+
+date
+time 
+
+
+
+
+
+ 
+
+

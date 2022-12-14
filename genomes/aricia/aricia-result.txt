@@ -1,0 +1,106 @@
+/opt/tools/anaconda2/lib/python2.7/site-packages/quast-4.6.0-py2.7.egg/EGG-INFO/scripts/quast.py -R GCF_905147365.1_ilAriAges1.1_genomic.fna --glimmer --output-dir test_quast ../../hifi_ecoli.p_ctg.fa ../../ecoli-canu/ecoli.correctedReads.fasta ../../ecoli_hiseq_spades/scaffolds.fasta
+
+Version: 4.6.0
+
+System information:
+  OS: Linux-3.10.0-1160.76.1.el7.x86_64-x86_64-with-centos-7.9.2009-Core (linux_64)
+  Python version: 2.7.12
+  CPUs number: 256
+
+Started: 2022-11-11 14:42:41
+
+Logging to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/quast.log
+NOTICE: Maximum number of threads is set to 64 (use --threads option to set it manually)
+
+CWD: /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia
+Main parameters: 
+  Threads: 64, minimum contig length: 500, ambiguity: one, threshold for extensive misassembly size: 1000
+
+Reference:
+  GCF_905147365.1_ilAriAges1.1_genomic.fna ==> GCF_905147365.1_ilAriAges1.1_genomic
+
+Contigs:
+  Pre-processing...
+WARNING: Skipping hifi_ecoli.p_ctg because it doesn't contain contigs >= 500 bp.
+
+  2  ../../ecoli-canu/ecoli.correctedReads.fasta ==> ecoli.correctedReads
+  3  ../../ecoli_hiseq_spades/scaffolds.fasta ==> scaffolds
+
+2022-11-11 14:44:50
+Running Basic statistics processor...
+  Reference genome:
+    GCF_905147365.1_ilAriAges1.1_genomic.fna, length = 435265205, num fragments = 25, GC % = 36.86
+  Contig files: 
+    1  ecoli.correctedReads
+    2  scaffolds
+  Calculating N50 and L50...
+    1  ecoli.correctedReads, N50 = 13074, L50 = 17, Total length = 827543, GC % = 69.95, # N's per 100 kbp =  0.00
+    2  scaffolds, N50 = 112463, L50 = 15, Total length = 4755000, GC % = 50.77, # N's per 100 kbp =  25.24
+  Drawing Nx plot...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/Nx_plot.pdf
+  Drawing NGx plot...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/NGx_plot.pdf
+  Drawing cumulative plot...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/cumulative_plot.pdf
+  Drawing GC content plot...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/GC_content_plot.pdf
+  Drawing ecoli.correctedReads GC content plot...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/ecoli.correctedReads_GC_content_plot.pdf
+  Drawing scaffolds GC content plot...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/scaffolds_GC_content_plot.pdf
+  Drawing Coverage histogram (bin size: 4x)...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/coverage_histogram.pdf
+  Drawing scaffolds coverage histogram (bin size: 4x)...
+    saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/basic_stats/scaffolds_coverage_histogram.pdf
+Done.
+
+2022-11-11 14:48:22
+Running Contig analyzer...
+  1  ecoli.correctedReads
+  1  Logging to files /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_ecoli-correctedReads.stdout and contigs_report_ecoli-correctedReads.stderr...
+  1  Aligning contigs to the reference
+    Aligning to different chromosomes in parallel (24 threads)
+NOTICE: 1   MUMmer plot cannot be created.
+
+  1  Nothing aligned for 'ecoli.correctedReads'.
+  2  scaffolds
+  2  Logging to files /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/contigs_reports/contigs_report_scaffolds.stdout and contigs_report_scaffolds.stderr...
+  2  Aligning contigs to the reference
+    Aligning to different chromosomes in parallel (24 threads)
+NOTICE: 2   MUMmer plot cannot be created.
+
+  2  Nothing aligned for 'scaffolds'.
+Failed aligning the contigs for all the assemblies. Only basic stats are going to be evaluated.
+WARNING: Please rerun QUAST using --test option to ensure that E-MEM aligner works properly.
+
+2022-11-11 14:59:37
+Running GlimmerHMM...
+  1  ecoli.correctedReads
+  1    Genes = 847 unique, 847 total
+  1    Predicted genes (GFF): /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/predicted_genes/ecoli-correctedReads_glimmer_genes.gff.gz
+  2  scaffolds
+  2    Genes = 3804 unique, 3804 total
+  2    Predicted genes (GFF): /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/predicted_genes/scaffolds_glimmer_genes.gff.gz
+Done.
+
+2022-11-11 15:04:10
+Creating large visual summaries...
+This may take a while: press Ctrl-C to skip this step..
+  1 of 2: Creating Icarus viewers...
+  2 of 2: Creating PDF with all tables and plots...
+Done
+
+2022-11-11 15:04:57
+RESULTS:
+  Text versions of total report are saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/report.txt, report.tsv, and report.tex
+  Text versions of transposed total report are saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/transposed_report.txt, transposed_report.tsv, and transposed_report.tex
+  HTML version (interactive tables and plots) saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/report.html
+  PDF version (tables and plots) is saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/report.pdf
+  Icarus (contig browser) is saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/icarus.html
+  Log saved to /home/taller-2048/GENOMICS_WORKSHOP/genomes/aricia/test_quast/quast.log
+
+Finished: 2022-11-11 15:04:59
+Elapsed time: 0:22:18.347468
+NOTICEs: 3; WARNINGs: 1; non-fatal ERRORs: 0
+
+Thank you for using QUAST!

@@ -1,0 +1,4 @@
+
+=== Error correction and assembling warnings:
+ * 0:04:32.079   148M / 2246M WARN    General                 (launcher.cpp              : 178)   Your data seems to have high uniform coverage depth. It is strongly recommended to use --isolate option.
+======= Warnings saved to /home/taller-2048/GENOMICS_WORKSHOP/ecoli_hiseq_spades/warnings.log

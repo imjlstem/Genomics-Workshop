@@ -1,0 +1,7 @@
+########################################
+#  nanopore-corrected: ../ecoli.correctedReads.fasta.gz
+#
+name   ecoli.correctedReads
+preset nanopore-corrected
+../ecoli.correctedReads.fasta.gz
+

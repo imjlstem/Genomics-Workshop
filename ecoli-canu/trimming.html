@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>canu analysis for assembly 'ecoli' in directory 'trimming'</title>
+<style type='text/css'>
+body       { font-family: Helvetica, Verdana, sans-serif; }
+h1, h2, h3 { color: #ee3e80; }
+p          { color: #665544; }
+th, td     { border: 1px solid #111111; padding: 2px 2px 2px 2px; }
+td:hover   { background-color: #e4e4e4; }
+th:hover   { background-color: #d4d4d4; }
+tr.details { visibility: collapse; }
+</style>
+</head>
+
+<body>
+
+<h1>Trimming</h1>
+<h2>Input Reads</h2>
+
+<table>
+<tr id='gkpload0'><td colspan='2'>../ecoli.correctedReads.fasta.gz</td></tr>
+<tr class='details'><td rowspan='8'>Parameters</td><td>preset = N/A</td></tr>
+<tr class='details'><td>defaultQV = 20</td></tr>
+<tr class='details'><td>isNonRandom = false</td></tr>
+<tr class='details'><td>removeDuplicateReads = true</td></tr>
+<tr class='details'><td>finalTrim = true</td></tr>
+<tr class='details'><td>removeSpurReads = true</td></tr>
+<tr class='details'><td>removeChimericReads = true</td></tr>
+<tr class='details'><td>checkForSubReads = true</td></tr>
+<tr class='details'><td rowspan='2'>FASTA</td><td>120 reads (827543 bp)</td></tr>
+<tr class='details'><td>0 reads (0 bp) were short and not loaded</td></tr>
+<tr class='details'><td rowspan='2'>FASTQ</td><td>0 reads (0 bp)</td></tr>
+<tr class='details'><td>0 reads (0 bp) were short and not loaded</td></tr>
+<tr><td colspan='2'>120 reads (827543 bp) loaded, 0 reads (0 bp) skipped, 0 warnings</td></tr>
+</table>
+
+<h2>Final Store</h2>
+
+<table>
+<tr><td colspan='2'>trimming/ecoli.gkpStore</td></tr>
+<tr><td>readsLoaded</td><td>120 reads (827543 bp)</td></tr>
+<tr><td>readsSkipped</td><td>0 reads (0 bp) (read was too short)</td></tr>
+<tr><td>warnings</td><td>0 warnings (invalid base or quality value)</td></tr>
+</table>
+<h3>Read Length Histogram</h3>
+<figure>
+<a href='trimming.html.files/readlengths.lg.png'><img src='trimming.html.files/readlengths.sm.png'></a>
+<figcaption>
+
+</figcaption>
+</figure>
+<h2>k-Mer Counts</h2>
+
+<figure>
+<a href='trimming.html.files/ecoli.ms22.histogram.lg.png'><img src='trimming.html.files/ecoli.ms22.histogram.sm.png'></a>
+<figcaption>
+Histogram for k=22 with 825023 mers, 821482 distinct mers and 819182 single-copy mers.  Largest count is 42.
+</figcaption>
+</figure>
+<h2>Overlaps</h2>
+
+<p>Overlaps not computed.</p>
+<h2>Trimming</h2>
+
+<p>Stage not computed or results file removed (trimming/3-overlapbasedtrimming/ecoli.1.trimReads.stats).</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.inputDeletedReads' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.inputNoTrimReads' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.inputReads' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.outputDeletedReads' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.outputNoOvlReads' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.outputTrimmedReads' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.outputUnchangedReads' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.trim3' not found.</p>
+<p>Image 'trimming/3-overlapbasedtrimming/ecoli.1.trimReads.trim5' not found.</p>
+<h2>Splitting</h2>
+
+<p>Stage not computed or results file removed (trimming/3-overlapbasedtrimming/ecoli.2.splitReads.stats).</p>
+
+<script type='text/javascript'>
+var toggleTable = function() {
+  var table = this.closest('table');
+  var elts  = table.querySelectorAll('.details');
+
+  for (var i=0; i<elts.length; i++) {
+    if (!elts[i].enabled) {
+      elts[i].enabled = true;
+      elts[i].style.visibility = 'visible';
+    } else {
+      elts[i].enabled = false;
+      elts[i].style.visibility = 'collapse';
+    }
+  }
+}
+document.getElementById('gkpload0').onclick = toggleTable;
+document.getElementById('gkpload0').style   = 'cursor: pointer;';
+</script>
+
+</body>
+
+</html>

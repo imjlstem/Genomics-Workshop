@@ -1,0 +1,18 @@
+
+OrthoFinder version 2.5.2 Copyright (C) 2014 David Emms
+
+2022-11-14 09:24:50 : Starting OrthoFinder 2.5.2
+256 thread(s) for highly parallel tasks (BLAST searches etc.)
+16 thread(s) for OrthoFinder algorithm
+
+Checking required programs are installed
+----------------------------------------
+Test can run "mcl -h" - ok
+Test can run "fastme -i /home/taller-2048/GENOMICS_WORKSHOP/genomes/orthofinder_1/OrthoFinder/Results_Nov14/WorkingDirectory/SimpleTest.phy -o /home/taller-2048/GENOMICS_WORKSHOP/genomes/orthofinder_1/OrthoFinder/Results_Nov14/WorkingDirectory/SimpleTest.tre" - ok
+
+WARNING: Files have been ignored as they don't appear to be FASTA files:
+orthofinder-result.txt
+orthofinder.slurm
+OrthoFinder expects FASTA files to have one of the following extensions: fas, fasta, fa, faa, pep
+ERROR: At least two species are required
+ERROR: An error occurred, ***please review the error messages*** they may contain useful information about the problem.

@@ -1,0 +1,4 @@
+nam 0 /home/taller-2048/GENOMICS_WORKSHOP/ERR1674581.fastq
+lib preset=N/A defaultQV=20 isNonRandom=false removeDuplicateReads=true finalTrim=true removeSpurReads=true removeChimericReads=true checkForSubReads=true
+dat 0 0 0 0 854 8331171 249 95240 0
+sum 854 8331171 249 95240 0

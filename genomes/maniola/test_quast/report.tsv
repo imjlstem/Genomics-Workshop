@@ -1,0 +1,32 @@
+Assembly	ecoli.correctedReads	scaffolds
+# contigs (>= 0 bp)	120	3136
+# contigs (>= 1000 bp)	120	142
+# contigs (>= 5000 bp)	40	67
+# contigs (>= 10000 bp)	25	61
+# contigs (>= 25000 bp)	6	50
+# contigs (>= 50000 bp)	1	29
+Total length (>= 0 bp)	827543	5543314
+Total length (>= 1000 bp)	827543	4623355
+Total length (>= 5000 bp)	627803	4492303
+Total length (>= 10000 bp)	512308	4443471
+Total length (>= 25000 bp)	225892	4254326
+Total length (>= 50000 bp)	50413	3477992
+# contigs	120	341
+Largest contig	50413	299336
+Total length	827543	4755000
+Reference length	402038846	402038846
+GC (%)	69.95	50.77
+Reference GC (%)	36.96	36.96
+N50	13074	112463
+N75	5968	44584
+L50	17	15
+L75	39	31
+# unaligned contigs	120 + 0 part	341 + 0 part
+Unaligned length	827543	4755000
+# N's per 100 kbp	0.00	25.24
+# predicted genes (unique)	847	3804
+# predicted genes (>= 0 bp)	847	3804
+# predicted genes (>= 300 bp)	616	3541
+# predicted genes (>= 1500 bp)	80	657
+# predicted genes (>= 3000 bp)	16	80
+NGA50	-	-

@@ -1,0 +1,7 @@
+2022-11-11 12:10:03 INFO:	***** Start a BUSCO v5.4.2 analysis, current time: 11/11/2022 12:10:03 *****
+2022-11-11 12:10:03 INFO:	Configuring BUSCO with local environment
+2022-11-11 12:10:03 INFO:	Mode is genome
+2022-11-11 12:10:03 ERROR:	Input /scratch/ecoli_hiseq_spades/scaffolds.fasta does not exist
+2022-11-11 12:10:03 ERROR:	BUSCO analysis failed!
+2022-11-11 12:10:03 ERROR:	Check the logs, read the user guide (https://busco.ezlab.org/busco_userguide.html), and check the BUSCO issue board on https://gitlab.com/ezlab/busco/issues
+

@@ -1,0 +1,12 @@
+java -ea -Xmx200m -cp /opt/bioinf/bbmap-37.36/current/ jgi.ReformatReads in1=/home/taller-2019/Workshop_materials/SRR10971019.fastq lhist=HiFi_length.txt
+Executing jgi.ReformatReads [in1=/home/taller-2019/Workshop_materials/SRR10971019.fastq, lhist=HiFi_length.txt]
+
+Set length histogram output to HiFi_length.txt
+No output stream specified.  To write to stdout, please specify 'out=stdout.fq' or similar.
+Input is being processed as unpaired
+Input:                  	95514 reads          	1389500381 bases
+Output:                 	95514 reads (100.00%) 	1389500381 bases (100.00%)
+
+Time:                         	38.977 seconds.
+Reads Processed:       95514 	2.45k reads/sec
+Bases Processed:       1389m 	35.65m bases/sec

@@ -1,0 +1,13 @@
+Canu v1.6 (+0 commits) r0 .
+
+Current Working Directory:
+/home/taller-2048/GENOMICS_WORKSHOP/ecoli-canu/correction/2-correction
+
+Command:
+/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/falcon_sense \
+  --min_idt 0.5 \
+  --min_len 1000 \
+  --max_read_len 130040 \
+  --min_ovl_len 500 \
+  --min_cov 0 \
+  --n_core 2

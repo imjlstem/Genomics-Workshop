@@ -1,0 +1,14 @@
+Canu v1.6 (+0 commits) r0 .
+
+Current Working Directory:
+/home/taller-2048/GENOMICS_WORKSHOP/ecoli-canu/trimming/1-overlapper
+
+Command:
+/opt/bioinf/canu-git/canu-1.6/Linux-amd64/bin/overlapInCorePartition \
+  -g ../ecoli.gkpStore \
+  -bl 100000000 \
+  -bs 0 \
+  -rs 2000000 \
+  -rl 0 \
+  -ol 500 \
+  -o ./ecoli.partition

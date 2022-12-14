@@ -1,0 +1,248 @@
+Settings:
+  Output files: "GCF_932276165.1_ilPluXylo3.1_genomic_hisat2_index.*.ht2"
+  Line rate: 6 (line is 64 bytes)
+  Lines per side: 1 (side is 64 bytes)
+  Offset rate: 4 (one in 16)
+  FTable chars: 10
+  Strings: unpacked
+  Local offset rate: 3 (one in 8)
+  Local fTable chars: 6
+  Local sequence length: 57344
+  Local sequence overlap between two consecutive indexes: 1024
+  Endianness: little
+  Actual local endianness: little
+  Sanity checking: disabled
+  Assertions: disabled
+  Random seed: 0
+  Sizeofs: void*:8, int:4, long:8, size_t:8
+Input files DNA, FASTA:
+  GCF_932276165.1_ilPluXylo3.1_genomic.fna
+Reading reference sizes
+  Time reading reference sizes: 00:00:21
+Calculating joined length
+Writing header
+Reserving space for joined string
+Joining reference sequences
+  Time to join reference sequences: 00:00:07
+  Time to read SNPs and splice sites: 00:00:00
+Using parameters --bmax 60618930 --dcv 1024
+  Doing ahead-of-time memory usage test
+  Passed!  Constructing with these parameters: --bmax 60618930 --dcv 1024
+Constructing suffix-array element generator
+Building DifferenceCoverSample
+  Building sPrime
+  Building sPrimeOrder
+  V-Sorting samples
+  V-Sorting samples time: 00:00:39
+  Allocating rank array
+  Ranking v-sort output
+  Ranking v-sort output time: 00:00:08
+  Invoking Larsson-Sadakane on ranks
+  Invoking Larsson-Sadakane on ranks time: 00:00:10
+  Sanity-checking and returning
+Building samples
+Reserving space for 12 sample suffixes
+Generating random suffixes
+QSorting 12 sample offsets, eliminating duplicates
+QSorting sample offsets, eliminating duplicates time: 00:00:00
+Multikey QSorting 12 samples
+  (Using difference cover)
+  Multikey QSorting samples time: 00:00:00
+Calculating bucket sizes
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Split 2, merged 6; iterating...
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Avg bucket size: 4.04126e+07 (target: 60618929)
+Converting suffix-array elements to index image
+Allocating ftab, absorbFtab
+Entering GFM loop
+Getting block 1 of 8
+  Reserving size (60618930) for bucket 1
+  Calculating Z arrays for bucket 1
+  Entering block accumulator loop for bucket 1:
+  bucket 1: 10%
+  bucket 1: 20%
+  bucket 1: 30%
+  bucket 1: 40%
+  bucket 1: 50%
+  bucket 1: 60%
+  bucket 1: 70%
+  bucket 1: 80%
+  bucket 1: 90%
+  bucket 1: 100%
+  Sorting block of length 47238090 for bucket 1
+  (Using difference cover)
+  Sorting block time: 00:01:51
+Returning block of 47238091 for bucket 1
+Getting block 2 of 8
+  Reserving size (60618930) for bucket 2
+  Calculating Z arrays for bucket 2
+  Entering block accumulator loop for bucket 2:
+  bucket 2: 10%
+  bucket 2: 20%
+  bucket 2: 30%
+  bucket 2: 40%
+  bucket 2: 50%
+  bucket 2: 60%
+  bucket 2: 70%
+  bucket 2: 80%
+  bucket 2: 90%
+  bucket 2: 100%
+  Sorting block of length 38094577 for bucket 2
+  (Using difference cover)
+  Sorting block time: 00:01:29
+Returning block of 38094578 for bucket 2
+Getting block 3 of 8
+  Reserving size (60618930) for bucket 3
+  Calculating Z arrays for bucket 3
+  Entering block accumulator loop for bucket 3:
+  bucket 3: 10%
+  bucket 3: 20%
+  bucket 3: 30%
+  bucket 3: 40%
+  bucket 3: 50%
+  bucket 3: 60%
+  bucket 3: 70%
+  bucket 3: 80%
+  bucket 3: 90%
+  bucket 3: 100%
+  Sorting block of length 41928027 for bucket 3
+  (Using difference cover)
+  Sorting block time: 00:01:38
+Returning block of 41928028 for bucket 3
+Getting block 4 of 8
+  Reserving size (60618930) for bucket 4
+  Calculating Z arrays for bucket 4
+  Entering block accumulator loop for bucket 4:
+  bucket 4: 10%
+  bucket 4: 20%
+  bucket 4: 30%
+  bucket 4: 40%
+  bucket 4: 50%
+  bucket 4: 60%
+  bucket 4: 70%
+  bucket 4: 80%
+  bucket 4: 90%
+  bucket 4: 100%
+  Sorting block of length 51406676 for bucket 4
+  (Using difference cover)
+  Sorting block time: 00:02:05
+Returning block of 51406677 for bucket 4
+Getting block 5 of 8
+  Reserving size (60618930) for bucket 5
+  Calculating Z arrays for bucket 5
+  Entering block accumulator loop for bucket 5:
+  bucket 5: 10%
+  bucket 5: 20%
+  bucket 5: 30%
+  bucket 5: 40%
+  bucket 5: 50%
+  bucket 5: 60%
+  bucket 5: 70%
+  bucket 5: 80%
+  bucket 5: 90%
+  bucket 5: 100%
+  Sorting block of length 58278994 for bucket 5
+  (Using difference cover)
+  Sorting block time: 00:02:18
+Returning block of 58278995 for bucket 5
+Getting block 6 of 8
+  Reserving size (60618930) for bucket 6
+  Calculating Z arrays for bucket 6
+  Entering block accumulator loop for bucket 6:
+  bucket 6: 10%
+  bucket 6: 20%
+  bucket 6: 30%
+  bucket 6: 40%
+  bucket 6: 50%
+  bucket 6: 60%
+  bucket 6: 70%
+  bucket 6: 80%
+  bucket 6: 90%
+  bucket 6: 100%
+  Sorting block of length 18066407 for bucket 6
+  (Using difference cover)
+  Sorting block time: 00:00:40
+Returning block of 18066408 for bucket 6
+Getting block 7 of 8
+  Reserving size (60618930) for bucket 7
+  Calculating Z arrays for bucket 7
+  Entering block accumulator loop for bucket 7:
+  bucket 7: 10%
+  bucket 7: 20%
+  bucket 7: 30%
+  bucket 7: 40%
+  bucket 7: 50%
+  bucket 7: 60%
+  bucket 7: 70%
+  bucket 7: 80%
+  bucket 7: 90%
+  bucket 7: 100%
+  Sorting block of length 47952073 for bucket 7
+  (Using difference cover)
+  Sorting block time: 00:01:54
+Returning block of 47952074 for bucket 7
+Getting block 8 of 8
+  Reserving size (60618930) for bucket 8
+  Calculating Z arrays for bucket 8
+  Entering block accumulator loop for bucket 8:
+  bucket 8: 10%
+  bucket 8: 20%
+  bucket 8: 30%
+  bucket 8: 40%
+  bucket 8: 50%
+  bucket 8: 60%
+  bucket 8: 70%
+  bucket 8: 80%
+  bucket 8: 90%
+  bucket 8: 100%
+  Sorting block of length 20336110 for bucket 8
+  (Using difference cover)
+  Sorting block time: 00:00:46
+Returning block of 20336111 for bucket 8
+Exited GFM loop
+fchr[A]: 0
+fchr[C]: 99715903
+fchr[G]: 161652298
+fchr[T]: 223616508
+fchr[$]: 323300961
+Exiting GFM::buildToDisk()
+Returning from initFromVector
+Wrote 111965133 bytes to primary GFM file: GCF_932276165.1_ilPluXylo3.1_genomic_hisat2_index.1.ht2
+Wrote 80825248 bytes to secondary GFM file: GCF_932276165.1_ilPluXylo3.1_genomic_hisat2_index.2.ht2
+Re-opening _in1 and _in2 as input streams
+Returning from GFM constructor
+Returning from initFromVector
+Wrote 141998513 bytes to primary GFM file: GCF_932276165.1_ilPluXylo3.1_genomic_hisat2_index.5.ht2
+Wrote 82302334 bytes to secondary GFM file: GCF_932276165.1_ilPluXylo3.1_genomic_hisat2_index.6.ht2
+Re-opening _in5 and _in5 as input streams
+Returning from HierEbwt constructor
+Headers:
+    len: 323300961
+    gbwtLen: 323300962
+    nodes: 323300962
+    sz: 80825241
+    gbwtSz: 80825241
+    lineRate: 6
+    offRate: 4
+    offMask: 0xfffffff0
+    ftabChars: 10
+    eftabLen: 0
+    eftabSz: 0
+    ftabLen: 1048577
+    ftabSz: 4194308
+    offsLen: 20206311
+    offsSz: 80825244
+    lineSz: 64
+    sideSz: 64
+    sideGbwtSz: 48
+    sideGbwtLen: 192
+    numSides: 1683860
+    numLines: 1683860
+    gbwtTotLen: 107767040
+    gbwtTotSz: 107767040
+    reverse: 0
+    linearFM: Yes
+Total time for call to driver() for forward index: 00:33:50

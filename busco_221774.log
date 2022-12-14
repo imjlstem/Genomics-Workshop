@@ -1,0 +1,24 @@
+2022-11-11 12:10:03 DEBUG:busco.run_BUSCO	Command line: /opt/python/miniconda3/envs/busco/bin/busco -m genome -i /scratch/ecoli_hiseq_spades/scaffolds.fasta -o Hiseq_busco --auto-lineage-prok
+2022-11-11 12:10:03 INFO:busco.run_BUSCO	***** Start a BUSCO v5.4.2 analysis, current time: 11/11/2022 12:10:03 *****
+2022-11-11 12:10:03 DEBUG:busco.ConfigManager	Getting config file
+2022-11-11 12:10:03 INFO:busco.ConfigManager	Configuring BUSCO with local environment
+2022-11-11 12:10:03 INFO:busco.BuscoConfig	Mode is genome
+2022-11-11 12:10:03 ERROR:busco.BuscoRunner	Input /scratch/ecoli_hiseq_spades/scaffolds.fasta does not exist
+2022-11-11 12:10:03 DEBUG:busco.BuscoRunner	Input /scratch/ecoli_hiseq_spades/scaffolds.fasta does not exist
+Traceback (most recent call last):
+  File "/opt/python/miniconda3/envs/busco/lib/python3.9/site-packages/BUSCO-5.4.2-py3.9.egg/busco/run_BUSCO.py", line 70, in run
+    self.load_config()
+  File "/opt/python/miniconda3/envs/busco/lib/python3.9/site-packages/BUSCO-5.4.2-py3.9.egg/busco/run_BUSCO.py", line 62, in load_config
+    self.config_manager.load_busco_config_main()
+  File "/opt/python/miniconda3/envs/busco/lib/python3.9/site-packages/BUSCO-5.4.2-py3.9.egg/busco/BuscoLogger.py", line 62, in wrapped_func
+    self.retval = func(*args, **kwargs)
+  File "/opt/python/miniconda3/envs/busco/lib/python3.9/site-packages/BUSCO-5.4.2-py3.9.egg/busco/ConfigManager.py", line 56, in load_busco_config_main
+    self.config_main.validate()
+  File "/opt/python/miniconda3/envs/busco/lib/python3.9/site-packages/BUSCO-5.4.2-py3.9.egg/busco/BuscoConfig.py", line 529, in validate
+    self._check_required_input_exists()
+  File "/opt/python/miniconda3/envs/busco/lib/python3.9/site-packages/BUSCO-5.4.2-py3.9.egg/busco/BuscoConfig.py", line 718, in _check_required_input_exists
+    raise BatchFatalError(
+busco.Exceptions.BatchFatalError: Input /scratch/ecoli_hiseq_spades/scaffolds.fasta does not exist
+2022-11-11 12:10:03 ERROR:busco.BuscoRunner	BUSCO analysis failed!
+2022-11-11 12:10:03 ERROR:busco.BuscoRunner	Check the logs, read the user guide (https://busco.ezlab.org/busco_userguide.html), and check the BUSCO issue board on https://gitlab.com/ezlab/busco/issues
+
